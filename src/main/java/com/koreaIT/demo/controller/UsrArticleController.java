@@ -1,6 +1,6 @@
 package com.koreaIT.demo.controller;
 
-import java.util.List;	
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,12 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
 	public Article doAdd(String title, String body) {
-		return articleService.writeArticle(title, body);
+		
+		articleService.writeArticle(title, body);
+		
+		int id = articleService.getLastInsertId();
+		
+		return articleService.getArticleById(id);
 	}
 	
 	@RequestMapping("/usr/article/getArticle")
