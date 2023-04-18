@@ -23,12 +23,11 @@ public class UsrMemberController {
 	@ResponseBody
 	public Member doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
 		
-		memberService.joinMember(loginId, loginPw, name, nickname, cellphoneNum, email);
+		memberService.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
 		
 		int id = memberService.getLastInsertId();
 		
 		return memberService.getMemberById(id);
 	}
-	
 	
 }
