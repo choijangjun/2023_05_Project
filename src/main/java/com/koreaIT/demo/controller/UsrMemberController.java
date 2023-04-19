@@ -33,12 +33,12 @@ public class UsrMemberController {
 			return "이름을 입력해주세요";
 		}
 		if (Util.empty(nickname)) {
-			return "닉네임을 입력해주세요";
+			return "닉네임을 입력해주세요"; 
 		}
 		if (Util.empty(cellphoneNum)) {
 			return "전화번호를 입력해주세요";
 		}
-		if (Util.empty(email)) {
+		if (Util.empty(email)) { 
 			return "이메일을 입력해주세요";
 		}
 		
