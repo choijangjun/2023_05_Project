@@ -51,7 +51,7 @@ public class MemberService {
 		return memberRepository.getMemberByNickname(nickname);
 	}
 
-	private Member getMemberByLoginId(String loginId) {
+	public Member getMemberByLoginId(String loginId) {
 		return memberRepository.getMemberByLoginId(loginId);
 	}
 
