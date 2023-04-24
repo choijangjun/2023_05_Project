@@ -52,12 +52,10 @@ public class UsrArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		
-		Article article = articleService.getArticleById(id);
-		if(article == null) {
-			return Util.f("%d번 게시물은 존재하지 않습니다", id);
-		}
+		Article article = articleService.getForPrintArticle(id);
 		
 		model.addAttribute("article", article);
+		
 		return "usr/article/detail";
 	}
 	

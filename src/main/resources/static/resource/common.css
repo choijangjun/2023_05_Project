@@ -8,6 +8,7 @@
 
 html > body {
 	font-family: 'NanumSquareNeo-Variable', sans-serif;
+	text-underline-position:under;
 }
 
 .table-box-type-1 > table {
@@ -18,4 +19,13 @@ html > body {
 	border:1px solid black;
 	padding: 10px;
 	text-align: center;
+}
+
+.btn-text-link {
+	color:black;
+}
+
+.btn-text-link:hover {
+	color:olive;
+	text-decoration: underline;
 }
