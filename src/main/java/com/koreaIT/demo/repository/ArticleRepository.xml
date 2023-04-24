@@ -21,6 +21,11 @@
 			FROM article
 			WHERE id = #{id}
 	</select>
+	<select id="getArticleById" resultType="Article">
+		SELECT * 
+			FROM article
+			WHERE id = #{id}
+	</select>
 	
 	<select id="getArticles" resultType="Article">
 		SELECT *
