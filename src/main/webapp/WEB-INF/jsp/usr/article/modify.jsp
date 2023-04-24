@@ -29,11 +29,12 @@
 						</tr>
 						<tr>
 							<th>제목</th>
-							<td>${article.title }</td>
+							<td></td>
+							<input type="text" placeholder=${article.title }maxlength=20 style="width:100%" >
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>${article.body }</td>
+							<td><textarea placeholder=${article.body }style="width: 100%; height: 100%"></textarea></td>
 						</tr>
 					</tbody>
 				</table>
@@ -41,10 +42,9 @@
 			
 			<div class="btns">
 				<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
-				<c:if test="${article.actorCanChangeData }">
-					<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
-					<a class="btn-text-link" href="doDelete?id=${article.id }">삭제</a>
-				</c:if>
+				<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
+				<a class="btn-text-link" href="doDelete?id=${article.id }">삭제</a>
+				
 			</div>
 		</div>
 	</section>
