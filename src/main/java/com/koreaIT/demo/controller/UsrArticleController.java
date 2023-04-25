@@ -2,6 +2,7 @@ package com.koreaIT.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.koreaIT.demo.service.ArticleService;
 import com.koreaIT.demo.util.Util;
 import com.koreaIT.demo.vo.Article;
 import com.koreaIT.demo.vo.ResultData;
+import com.koreaIT.demo.vo.Rq;
 
 @Controller
 public class UsrArticleController {
@@ -28,9 +30,11 @@ public class UsrArticleController {
 	// 액션 메서드
 	@RequestMapping("/usr/article/doAdd")
 	@ResponseBody
-	public ResultData<Article> doAdd(HttpSession httpSession, String title, String body) {
+	public ResultData<Article> doAdd(HttpServletRequest req, String title, String body) {
 		
-		if (httpSession.getAttribute("loginedMemberId") == null) {
+		Rq rq = new Rq(req);
+		
+		if (rq.getLoginedMemberId() == 0) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
 		
@@ -42,7 +46,7 @@ public class UsrArticleController {
 			return ResultData.from("F-2", "내용을 입력해주세요");
 		}
 		
-		articleService.writeArticle((int) httpSession.getAttribute("loginedMemberId"), title, body);
+		articleService.writeArticle(rq.getLoginedMemberId(), title, body);
 		
 		int id = articleService.getLastInsertId();
 		
@@ -50,15 +54,11 @@ public class UsrArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, HttpSession httpSession, int id) {
+	public String showDetail(Model model, HttpServletRequest req, int id) {
 		
-		int loginedMemberId = 0;
+		Rq rq = new Rq(req);
 		
-		if (httpSession.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) httpSession.getAttribute("loginedMemberId");
-		}
-		
-		Article article = articleService.getForPrintArticle(loginedMemberId, id);
+		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
 		
 		model.addAttribute("article", article);
 		
@@ -76,19 +76,17 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public ResultData<Article> doModify(HttpSession httpSession, int id, String title, String body) {
+	public ResultData<Article> doModify(HttpServletRequest req, int id, String title, String body) {
 		
-		if (httpSession.getAttribute("loginedMemberId") == null) {
+		Rq rq = new Rq(req);
+		
+		if (rq.getLoginedMemberId() == 0) {
 			return ResultData.from("F-A", "로그인 후 이용해주세요");
 		}
 		
 		Article article = articleService.getArticleById(id);
 		
-		if(article == null) {
-			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다", id));
-		}
-		
-		ResultData actorCanModifyRd = articleService.actorCanModify((int) httpSession.getAttribute("loginedMemberId"), article.getMemberId());
+		ResultData actorCanModifyRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
 		
 		if (actorCanModifyRd.isFail()) {
 			return ResultData.from(actorCanModifyRd.getResultCode(), actorCanModifyRd.getMsg());
@@ -99,24 +97,24 @@ public class UsrArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public ResultData doDelete(HttpSession httpSession, int id) {
+	public String doDelete(HttpServletRequest req, int id) {
 		
-		if (httpSession.getAttribute("loginedMemberId") == null) {
-			return ResultData.from("F-A", "로그인 후 이용해주세요");
+		Rq rq = new Rq(req);
+		
+		if (rq.getLoginedMemberId() == 0) {
+			return Util.jsHistoryBack("로그인 후 이용해주세요");
 		}
 		
 		Article article = articleService.getArticleById(id);
 		
-		if(article == null) {
-			return ResultData.from("F-1", Util.f("%d번 게시물은 존재하지 않습니다", id));
-		}
+		ResultData actorCanModifyRd = articleService.actorCanMD(rq.getLoginedMemberId(), article);
 		
-		if ((int) httpSession.getAttribute("loginedMemberId") != article.getMemberId()) {
-			return ResultData.from("F-B", "해당 게시물에 대한 권한이 없습니다");
+		if (actorCanModifyRd.isFail()) {
+			return Util.jsHistoryBack(actorCanModifyRd.getMsg());
 		}
 		
 		articleService.deleteArticle(id);
 		
-		return ResultData.from("S-1", Util.f("%d번 게시물을 삭제했습니다", id));
+		return Util.jsReplace(Util.f("%d번 게시물을 삭제했습니다", id), "list");
 	}
 }
