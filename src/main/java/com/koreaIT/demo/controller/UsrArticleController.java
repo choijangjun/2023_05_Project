@@ -53,7 +53,9 @@ public class UsrArticleController {
 		
 		Rq rq = (Rq) req.getAttribute("rq");
 		
-		Article article = articleService.getForPrintArticle(rq.getLoginedMemberId(), id);
+		Article article = articleService.getForPrintArticle(id);
+		
+		articleService.actorCanChangeData(rq.getLoginedMemberId(), article);
 		
 		model.addAttribute("article", article);
 		
@@ -67,6 +69,24 @@ public class UsrArticleController {
 		model.addAttribute("articles", articles);
 		
 		return "usr/article/list";
+	}
+	
+	@RequestMapping("/usr/article/modify")
+	public String modify(HttpServletRequest req, Model model, int id) {
+	
+		Rq rq = (Rq) req.getAttribute("rq");
+		
+		Article article = articleService.getForPrintArticle(id);
+		
+		ResultData actorCanMD = articleService.actorCanMD(rq.getLoginedMemberId(), article);
+		
+		if (actorCanMD.isFail()) {
+			return rq.jsReturnOnView(actorCanMD.getMsg(), true);
+		}
+		
+		model.addAttribute("article", article);
+		
+		return "usr/article/modify";
 	}
 	
 	@RequestMapping("/usr/article/doModify")

@@ -60,16 +60,14 @@ public class ArticleService {
 		return ResultData.from("S-1", "가능");
 	}
 
-	public Article getForPrintArticle(int loginedMemberId, int id) {
+	public Article getForPrintArticle(int id) {
 		
 		Article article = articleRepository.getForPrintArticle(id);
-		
-		actorCanChangeData(loginedMemberId, article);
 		
 		return article;
 	}
 
-	private void actorCanChangeData(int loginedMemberId, Article article) {
+	public void actorCanChangeData(int loginedMemberId, Article article) {
 		
 		ResultData actorCanChangeDataRd = actorCanMD(loginedMemberId, article);
 		
