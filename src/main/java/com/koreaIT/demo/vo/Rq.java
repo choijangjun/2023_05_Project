@@ -36,14 +36,7 @@ public class Rq {
 	public void jsPrintHistoryBack(String msg) {
 		resp.setContentType("text/html; charset=UTF-8;");
 		
-		println("<script>");
-		
-		if (!Util.empty(msg)) {
-			println("alert('" + msg + "');");
-		}
-		
-		println("history.back();");
-		println("</script>");
+		print(Util.jsHistoryBack(msg));
 	}
 
 	private void print(String str) {
@@ -53,10 +46,5 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
-	
-	private void println(String str) {
-		print(str + "\n");
-	}
-	
 	
 }
