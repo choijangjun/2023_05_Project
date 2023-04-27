@@ -20,22 +20,23 @@
 <body>
 
 	<div class="h-20 flex container mx-auto text-4xl">
-		<a href="/" class="px-3 flex items-center"><span><img src="/resource/images/google.png"/></span></a>
+		<a href="/" class="px-3 flex items-center"><span>로고</span></a>
 		<div class="flex-grow"></div>
 		<ul class="flex">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center btn btn-link" href="/"><span>HOME</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center btn btn-link mr-5" href="/usr/article/list"><span>LIST</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>HOME</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center btn btn-success" href="/usr/member/login"><span>LOGIN</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
 			</c:if>
 			<c:if test="${rq.getLoginedMemberId() != 0  }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center btn btn-error" href="/usr/member/doLogout"><span>LOGOUT</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>LOGOUT</span></a></li>
 			</c:if>
 		</ul>
 	</div>
 	
 	<section class="my-3 text-2xl">
 		<div class="container mx-auto px-3">
-			<h1>${pageTitle }&nbsp;Page</h1>
+			<h1>${pageTitle }</h1>
 		</div>
 	</section>
