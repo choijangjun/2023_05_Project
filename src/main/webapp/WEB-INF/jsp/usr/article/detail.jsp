@@ -40,10 +40,10 @@
 			</div>
 			
 			<div class="btns">
-				<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
+				<button class="btn-text-link btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
 				<c:if test="${article.actorCanChangeData }">
-					<a class="btn-text-link" href="modify?id=${article.id }">수정</a>
-					<a class="btn-text-link" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+					<a class="btn-text-link btn btn-outline" href="modify?id=${article.id }">수정</a>
+					<a class="btn-text-link btn btn-outline btn-error" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
 				</c:if>
 			</div>
 		</div>

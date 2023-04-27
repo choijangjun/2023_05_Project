@@ -37,16 +37,15 @@
 								<th>내용</th>
 								<td><textarea name="body" placeholder="내용을 입력해주세요">${article.body }</textarea></td>
 							</tr>
-							<tr>
-								<td colspan="2"><button>수정</button></td>
-							</tr>
+							
 						</tbody>
 					</table>
 				</div>
-			</form>
 			<div class="btns">
-				<button class="btn-text-link" type="button" onclick="history.back();">뒤로가기</button>
+				<button class="btn-text-link btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
+				<button class="btn-text-link btn btn-outline" >수정완료</button>
 			</div>
+			</form>
 		</div>
 	</section>
 <%@ include file="../common/foot.jsp" %>
