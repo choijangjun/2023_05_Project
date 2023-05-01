@@ -39,12 +39,14 @@
 				</table>
 			</div>
 			
-			<div class="btns">
-				<button class="btn-text-link btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
-				<c:if test="${article.actorCanChangeData }">
-					<a class="btn-text-link btn btn-outline" href="modify?id=${article.id }">수정</a>
-					<a class="btn-text-link btn btn-outline btn-error" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
-				</c:if>
+			<div class="btns flex justify-between">
+				<button class="btn-text-link btn btn-outline " type="button" onclick="history.back();">뒤로가기</button>
+				<div class="btns flex asdf">
+					<c:if test="${article.actorCanChangeData }">
+						<a class="btn-text-link btn btn-outline" href="modify?id=${article.id }">수정</a>
+						<a class="btn-text-link btn btn-outline btn-error" href="doDelete?id=${article.id }" onclick="if(confirm('정말 삭제하시겠습니까?') == false) return false;">삭제</a>
+					</c:if>
+				</div>
 			</div>
 		</div>
 	</section>
