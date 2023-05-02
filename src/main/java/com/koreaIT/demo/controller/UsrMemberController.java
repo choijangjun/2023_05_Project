@@ -58,7 +58,9 @@ public class UsrMemberController {
 		
 		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
 		
+		Member member = memberService.getMemberByLoginId(loginId);
 		
+		rq.login(member);
 		
 		return Util.jsReplace(Util.f("%s님 회원가입이 완료되었습니다!", member.getNickname()), "/");
 		

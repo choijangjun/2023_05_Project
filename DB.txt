@@ -14,6 +14,7 @@ CREATE TABLE article(
 
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 ALTER TABLE article ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
+ALTER TABLE article ADD COLUMN views INT UNSIGNED NOT NULL DEFAULT AFTER boardId;
 
 # member 테이블 생성
 CREATE TABLE `member`(
@@ -119,6 +120,8 @@ SELECT * FROM article;
 SELECT * FROM `member`;
 SELECT * FROM board;
 
+SELECT * FROM article WHERE title LIKE '%제%';
+
 SELECT LAST_INSERT_ID();
 
 /* 게시물 늘리기 쿼리
@@ -131,3 +134,5 @@ from article;
 */
 
 SELECT COUNT(*) FROM article;
+
+UPDATE article SET views = views + 1 WHERE id = 2;
