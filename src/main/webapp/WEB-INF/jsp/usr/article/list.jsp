@@ -29,6 +29,7 @@
 						<th>날짜</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				
@@ -39,6 +40,7 @@
 							<td>${article.regDate.substring(2, 16) }</td>
 							<td>${article.title }</td>
 							<td>${article.writerName }</td>
+							<td>${article.hitCount }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
