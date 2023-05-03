@@ -31,7 +31,7 @@ public class UsrMemberController {
 	
 	@RequestMapping("/usr/member/doJoin")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNum, String email) {
+	public String doJoin(String loginId, String loginPw, String loginPwCh, String name, String nickname, String cellphoneNum, String email) {
 
 		if (rq.getLoginedMemberId() != 0) {
 			return Util.jsHistoryBack("로그아웃 후 이용해주세요");
@@ -40,8 +40,18 @@ public class UsrMemberController {
 		if (Util.empty(loginId)) {
 			return Util.jsHistoryBack("아이디를 입력해주세요");
 		}
+		
+		Member member2 = memberService.getMemberByLoginId(loginId);
+		
+		if (member2 != null) {
+			return Util.jsHistoryBack(Util.f("%s은(는) 존재하는 아이디입니다", loginId));
+		}
+		
 		if (Util.empty(loginPw)) {
 			return Util.jsHistoryBack("비밀번호를 입력해주세요");
+		}
+		if (loginPw.equals(loginPwCh)==false) {
+			return Util.jsHistoryBack("비밀번호가 일치하지 않습니다");
 		}
 		if (Util.empty(name)) {
 			return Util.jsHistoryBack("이름을 입력해주세요");
@@ -59,6 +69,7 @@ public class UsrMemberController {
 		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
 		
 		Member member = memberService.getMemberByLoginId(loginId);
+		
 		
 		rq.login(member);
 		

@@ -41,9 +41,9 @@
 						</tbody>
 					</table>
 				</div>
-			<div class="btns">
-				<button class="btn-text-link btn btn-outline" type="button" onclick="history.back();">뒤로가기</button>
-				<button class="btn-text-link btn btn-outline" >수정완료</button>
+			<div class="btns mt-2">
+				<button class="btn-text-link btn btn-active btn-ghost" type="button" onclick="history.back();">뒤로가기</button>
+				<button class="btn-text-link btn btn-active btn-ghost" >수정완료</button>
 			</div>
 			</form>
 		</div>
