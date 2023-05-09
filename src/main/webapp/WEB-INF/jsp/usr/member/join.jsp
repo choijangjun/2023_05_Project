@@ -22,7 +22,7 @@
 							</tr>
 							<tr>
 								<th>비밀번호 재확인</th>
-								<td><input class="input input-bordered w-full" type="text" name="loginPwCh" placeholder="비밀번호를 다시한번 입력해주세요"/></td>
+								<td><input class="input input-bordered w-full" type="text" name="loginPwCh" placeholder="비밀번호를 재입력해주세요"/></td>
 							</tr>
 							<tr>
 								<th>이름</th>
