@@ -1,4 +1,4 @@
-package com.koreaIT.demo.util;	
+package com.koreaIT.demo.util;
 
 public class Util {
 	public static boolean empty(Object obj) {
@@ -49,7 +49,7 @@ public class Util {
 		
 		return Util.f("""
 				<script>
-					const msg = '%s'.trim(); 
+					const msg = '%s'.trim();
 					if (msg.length > 0) {
 						alert(msg);
 					}
@@ -57,4 +57,5 @@ public class Util {
 				</script>
 				""", msg, uri);
 	}
+	
 }
