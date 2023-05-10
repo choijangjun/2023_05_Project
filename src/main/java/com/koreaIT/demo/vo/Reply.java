@@ -15,7 +15,7 @@ public class Reply {
 	private String relTypeCode;
 	private int relId;
 	private String body;
-	
+	private boolean actorCanChangeData;
 	private String writerName;
 	
 	public String getForPrintBody() {
