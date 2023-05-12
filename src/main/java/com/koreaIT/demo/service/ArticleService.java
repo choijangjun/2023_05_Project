@@ -38,15 +38,15 @@ public class ArticleService {
 		
 		return articleRepository.getArticles(boardId, searchKeywordType, searchKeyword, limitStart, itemsInAPage);
 	}
-	
+
 	public void modifyArticle(int id, String title, String body) {
 		articleRepository.modifyArticle(id, title, body);
 	}
-	
+
 	public void deleteArticle(int id) {
 		articleRepository.deleteArticle(id);
 	}
-	
+
 	public ResultData actorCanMD(int loginedMemberId, Article article) {
 		if(article == null) {
 			return ResultData.from("F-1", "해당 게시물은 존재하지 않습니다");

@@ -127,7 +127,6 @@
 				
 				originalId = i;
 				originalForm = replyContent.html();
-				
 				let addHtml = `
 					<form action="../reply/doModify" method="POST" onsubmit="replyWrite_submitForm(this); return false;">
 						<input type="hidden" name="id" value="\${data.data1.id }" />
