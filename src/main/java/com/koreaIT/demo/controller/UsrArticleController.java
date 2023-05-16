@@ -1,6 +1,6 @@
 package com.koreaIT.demo.controller;
 
-import java.util.List;
+import java.util.List;	
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +38,9 @@ public class UsrArticleController {
 		this.replyService = replyService;
 		this.rq = rq;
 	}
+	
+	
+	
 
 	@RequestMapping("/usr/article/write")
 	public String write() {
@@ -53,7 +56,7 @@ public class UsrArticleController {
 		}
 
 		if (Util.empty(body)) {
-			return Util.jsHistoryBack("내용을 입력해주세요");
+			return Util.jsHistoryBack("내용을 입력해주세요!!");
 		}
 
 		articleService.writeArticle(rq.getLoginedMemberId(), boardId, title, body);

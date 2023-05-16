@@ -20,15 +20,15 @@
 </head>
 <body>
 
-	<div class="h-20 flex container mx-auto text-4xl">
+	<div class="h-20 flex container mx-auto text-3xl">
 		<a href="/" class="px-3 flex items-center"><span>로고</span></a>
 		<div class="flex-grow"></div>
 		<ul class="flex">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/"><span>HOME</span></a></li>
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
 			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>SIGNUP</span></a></li>
 			</c:if>
 			<c:if test="${rq.getLoginedMemberId() != 0  }">
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>MYPAGE</span></a></li>

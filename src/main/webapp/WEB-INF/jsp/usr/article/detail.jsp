@@ -58,16 +58,18 @@
 							<th>추천</th>
 							<td>
 								<c:if test="${rq.getLoginedMemberId() == 0 }">
-									<span class="ml-2 badge">좋아요 : ${article.goodReactionPoint }개</span>
-									<br />
-									<span class="ml-2 badge">싫어요 : ${article.badReactionPoint * -1 }개</span>
+									<a class="btn btn-outline btn-xs" href="#">👍좋아요</a>
+									<span class="ml-2 badge">${article.goodReactionPoint }</span>
+									&nbsp;&nbsp;&nbsp;
+									<a class="btn btn-outline btn-xs" href="#">👎싫어요</a>
+									<span class="ml-2 badge">${article.badReactionPoint * -1 }</span>
 								</c:if>
 								<c:if test="${rq.getLoginedMemberId() != 0 }">
-									<a id="goodBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=1">좋아요👍</a>
-									<span class="ml-2 badge">좋아요 : ${article.goodReactionPoint }개</span>
-									<br />
-									<a id="badBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=-1">싫어요👎</a>
-									<span class="ml-2 badge">싫어요 : ${article.badReactionPoint * -1 }개</span>
+									<a id="goodBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=1">👍좋아요</a>
+									<span class="ml-2 badge"> ${article.goodReactionPoint }</span>
+									&nbsp;&nbsp;&nbsp;
+									<a id="badBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=-1">👎싫어요</a>
+									<span class="ml-2 badge">${article.badReactionPoint * -1 }</span>
 								</c:if>
 							</td>
 						</tr>
