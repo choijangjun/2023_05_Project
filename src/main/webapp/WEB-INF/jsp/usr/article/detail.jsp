@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="Detail" />
 <%@ include file="../common/head.jsp" %>
+<%@ include file="../common/toastUiEditorLib.jsp" %>
 
 	<script>
 		function getReactionPoint(){
@@ -58,18 +59,16 @@
 							<th>추천</th>
 							<td>
 								<c:if test="${rq.getLoginedMemberId() == 0 }">
-									<a class="btn btn-outline btn-xs" href="#">👍좋아요</a>
-									<span class="ml-2 badge">${article.goodReactionPoint }</span>
-									&nbsp;&nbsp;&nbsp;
-									<a class="btn btn-outline btn-xs" href="#">👎싫어요</a>
-									<span class="ml-2 badge">${article.badReactionPoint * -1 }</span>
+									<span class="ml-2 badge">좋아요 : ${article.goodReactionPoint }개</span>
+									<br />
+									<span class="ml-2 badge">싫어요 : ${article.badReactionPoint * -1 }개</span>
 								</c:if>
 								<c:if test="${rq.getLoginedMemberId() != 0 }">
-									<a id="goodBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=1">👍좋아요</a>
-									<span class="ml-2 badge"> ${article.goodReactionPoint }</span>
-									&nbsp;&nbsp;&nbsp;
-									<a id="badBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=-1">👎싫어요</a>
-									<span class="ml-2 badge">${article.badReactionPoint * -1 }</span>
+									<a id="goodBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=1">좋아요👍</a>
+									<span class="ml-2 badge">좋아요 : ${article.goodReactionPoint }개</span>
+									<br />
+									<a id="badBtn" class="btn btn-outline btn-xs" href="../reactionPoint/doInsertReactionPoint?relId=${article.id }&relTypeCode=article&point=-1">싫어요👎</a>
+									<span class="ml-2 badge">싫어요 : ${article.badReactionPoint * -1 }개</span>
 								</c:if>
 							</td>
 						</tr>
@@ -83,7 +82,11 @@
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td>${article.getForPrintBody() }</td>
+							<td>
+								<div class="toast-ui-viewer">
+									<script type="text/x-template">${article.body }</script>
+								</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -129,6 +132,7 @@
 				
 				originalId = i;
 				originalForm = replyContent.html();
+				
 				let addHtml = `
 					<form action="../reply/doModify" method="POST" onsubmit="replyWrite_submitForm(this); return false;">
 						<input type="hidden" name="id" value="\${data.data1.id }" />

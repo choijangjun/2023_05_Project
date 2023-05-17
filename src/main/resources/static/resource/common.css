@@ -16,6 +16,10 @@ html > body .ProseMirror, html > body .toastui-editor-contents {
 	font-size: 1.25rem;
 }
 
+html > body .toast-ui-viewer .toastui-editor-contents {
+	text-align: center;
+}
+
 .table-box-type-1 > table {
 	width: 100%;
 }
