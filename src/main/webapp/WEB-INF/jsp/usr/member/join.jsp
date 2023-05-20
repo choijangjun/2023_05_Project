@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="Join" />
 <%@ include file="../common/head.jsp" %>
+<%@ include file="../common/search.jsp" %>
 
 <script>
 	let validLoginId = '';
@@ -110,7 +111,7 @@
 	}
 </script>
 
-	<section class="mt-8 text-xl">
+	<section class="pt-44 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doJoin" method="POST" onsubmit="join_submitForm(this); return false;">
 				<div class="table-box-type-1">

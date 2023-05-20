@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="CHECK PASSWORD" />
 <%@ include file="../common/head.jsp" %>
-	<section class="mt-8 text-xl">
+	<section class="pt-44 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doCheckPassword" method="POST">
 				<div class="table-box-type-1">

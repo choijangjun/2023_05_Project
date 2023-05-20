@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="Login" />
 <%@ include file="../common/head.jsp" %>
-	<section class="mt-8 text-xl">
+<%@ include file="../common/search.jsp" %>
+	<section class="pt-44 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doLogin" method="POST">
 				<div class="table-box-type-1">
@@ -25,7 +26,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</div>	
 			</form>
 			<div class="btns mt-2">
 				<button class="btn-text-link btn btn-active" type="button" onclick="history.back();">뒤로가기</button>

@@ -20,26 +20,18 @@
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-
-	<div class="h-20 flex container mx-auto text-3xl">
-		<a href="/" class="px-3 flex items-center"><span><img src="/resource/images/logo.png" style="width: 50%; height: auto;"/></span></a>
-		<div class="flex-grow"></div>
-		<ul class="flex">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>NOTICE</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>FREE</span></a></li>
+	<header class="head-header text-2xl border-bottom-line ">
+		<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center"><img class="object-cover " src="/resource/images/EVENMOYA.png" /></a>
+		<ul class=" flex">
+			<li ><a class="hover:text-gray-600 h-10 px-3 flex items-center cursor-pointer" onclick=""><i class=" fa-solid fa-bell"></i></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>LOGIN</span></a></li>
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>SIGNUP</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>로그인</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/join"><span>회원가입</span></a></li>
 			</c:if>
 			<c:if test="${rq.getLoginedMemberId() != 0  }">
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>MYPAGE</span></a></li>
-				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>LOGOUT</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>마이페이지</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>로그아웃</span></a></li>
 			</c:if>
+			<li class="mr-10"></li>
 		</ul>
-	</div>
-	
-	<section class="my-3 text-2xl">
-		<div class="container mx-auto px-3">
-			<h1>${pageTitle }</h1>
-		</div>
-	</section>
+	</header>

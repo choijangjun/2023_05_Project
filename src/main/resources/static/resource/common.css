@@ -40,5 +40,39 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 }
 
 .border-bottom-line {
-	border-bottom: 1px solid #d6cbcb;
+	border-bottom: 1px solid #B7B7B7;
+}
+.head-header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 48px;
+	padding: 1rem;
+	background-color: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+
+.search-input {
+	width: 700px;
+	height: 48px;
+	border-radius: 20px 0 0 20px;
+	border: 1px solid #B7B7B7;
+}
+.search-icon {
+	margin-left: -4px;
+	height: 48px;
+	border-radius: 0 20px 20px 0;
+}
+.search-input:focus {
+	outline:1px solid blue;
+}
+
+.search-select {
+	width: 100px;
+	height: 38px;
+	border: 1px solid #B7B7B7;
+	text-align: center;
 }

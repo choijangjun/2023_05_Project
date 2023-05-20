@@ -31,7 +31,7 @@
 		})
 	</script>
 
-	<section class="mt-8 text-xl">
+	<section class="pt-48 text-xl">
 		<div class="container mx-auto px-3 pb-5 border-bottom-line">
 			<div class="table-box-type-1">
 				<table class="table table-zebra">

@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="pageTitle" value="MyPage" />
 <%@ include file="../common/head.jsp" %>
-	<section class="mt-8 text-xl">
+<%@ include file="../common/search.jsp" %>
+	<section class="pt-44 text-xl">
 		<div class="container mx-auto px-3">
 			<div class="table-box-type-1">
 				<table class="table table-zebra w-full">

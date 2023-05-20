@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="pageTitle" value="Main" />
 <%@ include file="../common/head.jsp" %>
-	<section class="mt-8">
-		<div class="container mx-auto">
+<%@ include file="../common/search.jsp" %>
+	<section class="pt-56">
+		<div class="mx-auto">
 			<div>
-				원하는 게시글을 작성하고 공유하세요.
+				각종 이벤트를 공유하고 참여하세요!
 			</div>
 			<img src="/resource/images/logo.png"/>
 		</div>

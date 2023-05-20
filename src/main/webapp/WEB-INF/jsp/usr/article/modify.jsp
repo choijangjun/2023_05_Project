@@ -4,7 +4,7 @@
 <c:set var="pageTitle" value="Modify" />
 <%@ include file="../common/head.jsp" %>
 <%@ include file="../common/toastUiEditorLib.jsp" %>
-	<section class="mt-8 text-xl">
+	<section class="pt-56 text-xl">
 		<div class="container mx-auto px-3">
 			<form action="doModify" method="POST" onsubmit="submitForm(this); return false;">
 				<input type="hidden" name="body" />
