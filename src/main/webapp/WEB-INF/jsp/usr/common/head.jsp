@@ -20,8 +20,14 @@
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-	<header class="head-header text-2xl border-bottom-line ">
-		<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center"><img class="object-cover " src="/resource/images/EVENMOYA.png" /></a>
+	<header class="head-header text-sm border-bottom-line ">
+		<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center ml-3"><img class="object-cover " src="/resource/images/EVENMOYA.png" /></a>
+		<ul class="flex">
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>모든 이벤트</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>쇼핑</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>게시판</span></a></li>
+			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>소개</span></a></li>
+		</ul>
 		<ul class=" flex">
 			<li ><a class="hover:text-gray-600 h-10 px-3 flex items-center cursor-pointer" onclick=""><i class=" fa-solid fa-bell"></i></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
@@ -32,6 +38,6 @@
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>마이페이지</span></a></li>
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/doLogout"><span>로그아웃</span></a></li>
 			</c:if>
-			<li class="mr-10"></li>
+			<li class="mr-3"></li>
 		</ul>
 	</header>

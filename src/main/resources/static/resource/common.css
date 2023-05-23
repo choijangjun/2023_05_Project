@@ -62,7 +62,6 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 	border: 1px solid #B7B7B7;
 }
 .search-icon {
-	margin-left: -4px;
 	height: 48px;
 	border-radius: 0 20px 20px 0;
 }
@@ -75,4 +74,19 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 	height: 38px;
 	border: 1px solid #B7B7B7;
 	text-align: center;
+}
+
+.search-list {
+	height: 48px;
+	border: 1px solid #B7B7B7;
+}
+
+.main-img-a {
+	display: inline-block;
+}
+
+.main-img {
+	width: 355px;
+	height: 277px;
+	border-radius: 5px 5px 5px 5px;
 }
