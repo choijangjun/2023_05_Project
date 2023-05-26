@@ -60,13 +60,16 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 	height: 48px;
 	border-radius: 20px 0 0 20px;
 	border: 1px solid #B7B7B7;
+	background-color: #EBEBEB;
 }
+
+.search-input:focus {
+	outline:1px solid blue;
+}
+
 .search-icon {
 	height: 48px;
 	border-radius: 0 20px 20px 0;
-}
-.search-input:focus {
-	outline:1px solid blue;
 }
 
 .search-select {
@@ -88,5 +91,13 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 .main-img {
 	width: 355px;
 	height: 277px;
-	border-radius: 5px 5px 5px 5px;
+	border-radius: 5px;
+}
+
+.main-span {
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+.main-img-span {
 }

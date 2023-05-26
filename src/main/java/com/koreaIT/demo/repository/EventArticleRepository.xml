@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreaIT.demo.repository.EventArticleRepository">
+
+	
+	<update id="increaseHitCount">
+		UPDATE article
+			SET hitCount = hitCount + 1
+			WHERE id = #{id}
+	</update>
+	
+	<select id="getEventArticlesCnt" resultType="int">
+		SELECT COUNT(*) 
+			FROM event_Article AS EA
+			WHERE 1 = 1	
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordType == 'name'">
+						AND EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'section'">
+						AND EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'goods'">
+						AND EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'needs'">
+						AND EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'price'">
+						AND EA.price = #{searchKeyword}
+					</when>
+					<otherwise>
+						AND (
+							EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+						)
+					</otherwise>
+				</choose>
+			</if>
+	</select>
+	
+	<select id="getEventArticles" resultType="EventArticle">
+		SELECT * 
+			FROM event_Article AS EA
+			WHERE 1 = 1	
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordType == 'name'">
+						AND EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'section'">
+						AND EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'goods'">
+						AND EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'needs'">
+						AND EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'price'">
+						AND EA.price = #{searchKeyword}
+					</when>
+					<otherwise>
+						AND (
+							EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+						)
+					</otherwise>
+				</choose>
+			</if>
+	</select>
+	
+</mapper>

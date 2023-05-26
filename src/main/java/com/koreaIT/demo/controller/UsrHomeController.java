@@ -1,13 +1,28 @@
 package com.koreaIT.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.koreaIT.demo.vo.Rq;
 
 @Controller
 public class UsrHomeController {
+	private UsrEventArticleController usrEventArticleController; 
+	private Rq rq;
+	
+	@Autowired
+	public UsrHomeController(UsrEventArticleController usrEventArticleController, Rq rq) {
+		this.usrEventArticleController = usrEventArticleController;
+		this.rq = rq;
+	}
 	
 	@RequestMapping("/usr/home/main")
-	public String showMain() {
+	public String showMain(Model model, String searchKeywordType,
+			@RequestParam(defaultValue = "") String searchKeyword) {
+		usrEventArticleController.showList(model, searchKeywordType, searchKeyword);
 		return "usr/home/main";
 	}
 	

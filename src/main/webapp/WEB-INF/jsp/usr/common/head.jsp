@@ -21,13 +21,16 @@
 </head>
 <body>
 	<header class="head-header text-sm border-bottom-line ">
-		<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center ml-3"><img class="object-cover " src="/resource/images/EVENMOYA.png" /></a>
-		<ul class="flex">
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>모든 이벤트</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>쇼핑</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>게시판</span></a></li>
-			<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/login"><span>소개</span></a></li>
-		</ul>
+		<div class ="flex items-center">
+			<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center ml-3"><img class="object-cover " src="/resource/images/EVENMOYA.png" /></a>
+			<a class=" hover:underline h-full px-3 flex items-center" href="/usr/eventArticle/list"><span>모든 이벤트</span></a>
+			<a class=" hover:underline h-full px-3 flex items-center" href="/usr/eventArticle/share"><span>이벤트 공유</span></a>
+			<a class="hover:underline h-full px-3 flex items-center" href="/usr/member/login"><span>쇼핑</span></a>
+			<a class="hover:underline h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>공지사항</span></a>
+			<a class="hover:underline h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>자유게시판</span></a>
+			<a class="hover:underline h-full px-3 flex items-center" href="/usr/member/login"><span>소개</span></a>
+		</div>
+		
 		<ul class=" flex">
 			<li ><a class="hover:text-gray-600 h-10 px-3 flex items-center cursor-pointer" onclick=""><i class=" fa-solid fa-bell"></i></a></li>
 			<c:if test="${rq.getLoginedMemberId() == 0 }">
