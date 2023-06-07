@@ -1,4 +1,4 @@
-# DB 삭제/생성/사용
+ # DB 삭제/생성/사용
 DROP DATABASE IF EXISTS SB_AM;
 CREATE DATABASE SB_AM;
 USE SB_AM;
@@ -16,7 +16,26 @@ ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 ALTER TABLE article ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
 ALTER TABLE article ADD COLUMN hitCount INT UNSIGNED NOT NULL DEFAULT 0;
 
+CREATE TABLE event_Article(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT UNSIGNED NOT NULL ,
+    section VARCHAR(50) NOT NULL COMMENT 'movie(영화), food(음식), dessert(디저트), fashion(패션), phoneplan(요금제)',
+    goods VARCHAR(50) NOT NULL COMMENT '상품',
+    needs VARCHAR(50) NOT NULL COMMENT '참여조건',
+    price INT DEFAULT 0 COMMENT '가격',
+    `period` VARCHAR(100) NOT NULL COMMENT '이벤트 기간',
+    image VARCHAR(100) NOT NULL COMMENT '이미지 경로',
+    site VARCHAR(100) NOT NULL COMMENT '사이트 경로'
+);
+ALTER TABLE event_Article ADD COLUMN hitCount INT UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE event_Article ADD COLUMN `name` VARCHAR(50) NOT NULL AFTER memberId;
+
+SELECT COUNT(*) FROM event_Article;
+
 DESC article;
+DESC event_Article;
 
 # member 테이블 생성
 CREATE TABLE `member`(
@@ -66,6 +85,78 @@ CREATE TABLE reply(
     relId INT UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
 	`body` TEXT NOT NULL
 );
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+`name` = '메가박스',
+section = 'movie',
+goods = '티켓',
+needs = '선착순',
+price = 0,
+`period` = '23_05_24 ~ 23_05_26',
+image = 'https://img.megabox.co.kr/SharedImg/event/2023/05/19/ANxPzcWa88MtC7SPkVZ5BoGBoupqXW8N.jpg',
+site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+`name` = '무신사스토어',
+section = 'fashion',
+goods = '신발',
+needs = '응모',
+price = 1000,
+`period` = '23_05_22 ~ 23_05_27',
+image = 'https://image.msscdn.net/contents/images/raffles/2023/4c5e95c84b16418fa16c0a0c055d49bf.png',
+site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+`name` = '베스킨라빈스',
+section = 'dessert',
+goods = '아이스크림',
+needs = '인스타',
+price = 0,
+`period` = '23_05_21 ~ 23_06_26',
+image = 'https://www.baskinrobbins.co.kr/upload/event/image/1743759721.jpg',
+site = 'https://www.baskinrobbins.co.kr/event/list.php';
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+`name` = '메가박스',
+section = 'movie',
+goods = '티켓',
+needs = '선착순',
+price = 0,
+`period` = '23_05_24 ~ 23_05_26',
+image = 'https://img.lotteeatz.com/upload/event/THUMBNAIL/2023/04/28/20230428162310267_4.jpg/dims/resize/x200/optimize',
+site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+`name` = '메가박스',
+section = 'movie',
+goods = '티켓',
+needs = '선착순',
+price = 0,
+`period` = '23_05_24 ~ 23_05_26',
+image = 'https://img.lotteeatz.com/upload/event/THUMBNAIL/2023/04/28/20230428162310267_4.jpg/dims/resize/x200/optimize',
+site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
+
+# event_Article 데이터 조회
+SELECT * FROM event_Article;
 
 # article 테스트 데이터
 INSERT INTO article

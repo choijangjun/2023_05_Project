@@ -193,8 +193,6 @@
 					<input type="hidden" name="relId" value="${article.id }" />
 					<div class="mt-4 border border-gray-400 rounded-lg text-base p-4">
 						<div class="mb-2"><span>${rq.getLoginedMember().getNickname() }</span></div>
-<!-- 						밑의 방식으로도 가능함 -->
-<%-- 						<div class="mb-2"><span>${rq.loginedMember.nickname }</span></div> --%>
 						<textarea class="textarea textarea-bordered w-full" name="body" placeholder="댓글을 남겨보세요"></textarea>
 						<div class="flex justify-end"><button class="btn-text-link btn btn-active btn-sm">등록</button></div>
 					</div>

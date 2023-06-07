@@ -9,7 +9,7 @@ import com.koreaIT.demo.vo.EventArticle;
 @Mapper
 public interface EventArticleRepository {
 	
-	public List<EventArticle> getEventArticles(String searchKeywordType, String searchKeyword); 
+	public List<EventArticle> getEventArticles(String searchKeywordType, String searchKeyword, String checkKeywordType, String checkKeyword); 
 	
 	void increaseHitCount(int id);
 

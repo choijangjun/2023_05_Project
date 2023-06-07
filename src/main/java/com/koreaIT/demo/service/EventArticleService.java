@@ -19,9 +19,9 @@ public class EventArticleService {
 	}
 	
 	
-	public List<EventArticle> getEventArticles(String searchKeywordType, String searchKeyword){
+	public List<EventArticle> getEventArticles(String searchKeywordType, String searchKeyword, String checkKeywordType, String checkKeyword){
 		
- 		List<EventArticle> eventArticles = eventArticleRepository.getEventArticles(searchKeywordType, searchKeyword);
+ 		List<EventArticle> eventArticles = eventArticleRepository.getEventArticles(searchKeywordType, searchKeyword, checkKeywordType, checkKeyword);
  		
 		return eventArticles;
 	}

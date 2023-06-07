@@ -1,5 +1,7 @@
 package com.koreaIT.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +22,10 @@ public class UsrHomeController {
 	}
 	
 	@RequestMapping("/usr/home/main")
-	public String showMain(Model model, String searchKeywordType,
-			@RequestParam(defaultValue = "") String searchKeyword) {
-		usrEventArticleController.showList(model, searchKeywordType, searchKeyword);
+	public String showMain(Model model, @RequestParam(defaultValue = "") String searchKeywordType,
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "") String checkKeywordType,
+			@RequestParam(defaultValue = "") String checkKeyword) {
+		usrEventArticleController.showList(model, searchKeywordType, searchKeyword, checkKeywordType, checkKeyword);
 		return "usr/home/main";
 	}
 	
