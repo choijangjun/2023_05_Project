@@ -9,9 +9,11 @@ import com.koreaIT.demo.vo.EventArticle;
 @Mapper
 public interface EventArticleRepository {
 	
-	public List<EventArticle> getEventArticles(String searchKeywordType, String searchKeyword, String checkKeywordType, String checkKeyword); 
+	public List<EventArticle> getEventArticlesToSearchKeyword(String searchKeywordType, String searchKeyword); 
+	public int getEventArticlesCntToSearchKeyword(String searchKeywordType, String searchKeyword);
 	
 	void increaseHitCount(int id);
 
-	public int getEventArticlesCnt(String searchKeywordType, String searchKeyword);
+	public List<EventArticle> getEventArticlesToCheckKeyword(List<String> checkKeyword); 
+	public int getEventArticlesCntToCheckKeyword(List<String> checkKeyword);
 }
