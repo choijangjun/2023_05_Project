@@ -21,6 +21,7 @@ public class EventArticle {
 	private String image;
 	private String site;
 	private int hitCount;
+	private int save;
 	
 	private String writerName;
 	private boolean actorCanChangeData;

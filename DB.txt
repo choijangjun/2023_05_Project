@@ -75,6 +75,18 @@ CREATE TABLE reactionPoint(
 	`point` SMALLINT NOT NULL DEFAULT 0
 );
 
+
+# saveEventArticle 테이블 생성
+CREATE TABLE saveEventArticle(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+    memberId INT UNSIGNED NOT NULL,
+    relTypeCode VARCHAR(20) NOT NULL COMMENT '관련 데이터 타입 코드',
+    relId INT UNSIGNED NOT NULL COMMENT '관련 데이터 번호'
+);
+ALTER TABLE saveEventArticle ADD COLUMN save SMALLINT NOT NULL DEFAULT 1;
+
 # reply 테이블 생성
 CREATE TABLE reply(
 	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -318,7 +330,7 @@ SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM reactionPoint;
 SELECT * FROM reply;
-
+DESC reactionPoint;
 SELECT LAST_INSERT_ID();
 
 /* 게시물 늘리기 쿼리
@@ -330,4 +342,17 @@ select now(), now(), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1, CONcat('제�
 from article;
 */
 
-SELECT COUNT(*) FROM article;
+
+DESC saveEventArticle;
+
+TRUNCATE saveEventArticle;
+
+SELECT * FROM saveEventArticle;
+
+SELECT EA.*
+				, IFNULL(SEA.save, 0)
+			FROM event_Article AS EA
+			LEFT JOIN saveEventArticle AS SEA
+			ON EA.id = SEA.relId
+			WHERE 1 = 1
+			ORDER BY id;

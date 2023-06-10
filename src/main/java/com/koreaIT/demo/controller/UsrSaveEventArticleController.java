@@ -5,42 +5,55 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.koreaIT.demo.service.ReactionPointService;
-import com.koreaIT.demo.util.Util;
-import com.koreaIT.demo.vo.ReactionPoint;
-import com.koreaIT.demo.vo.ResultData;
+import com.koreaIT.demo.service.SaveEventArticleService;
 import com.koreaIT.demo.vo.Rq;
+import com.koreaIT.demo.vo.SaveEventArticle;
 
-//@Controller
-//public class UsrSaveEventArticleController {
-//
-//	private SaveEventArticleService saveEventArticleService;
-//	private Rq rq;
-//
-//	@Autowired
-//	public UsrSaveEventArticleController(SaveEventArticleService saveEventArticleService, Rq rq) {
-//		this.saveEventArticleService = saveEventArticleService;
-//		this.rq = rq;
-//	}
-//	
-//	@RequestMapping("/usr/saveEventArticle/doInsertSaveEventArticle")
-//	@ResponseBody
-//	public String doInsertReactionPoint(int relId, String relTypeCode, int point) {
-//		
-//		ReactionPoint reactionPoint = reactionPointService.getReactionPoint(rq.getLoginedMemberId(), relId, relTypeCode);
-//		
-//		if (reactionPoint.getSumReactionPoint() != 0) {
-//			reactionPointService.doDeleteReactionPoint(rq.getLoginedMemberId(), relId, relTypeCode);
-//		}
-//		
-//		reactionPointService.doInsertReactionPoint(rq.getLoginedMemberId(), relId, relTypeCode, point);
-//		
-//		if (point == 1) {
-//			return Util.jsReplace(Util.f("%d번 글에 좋아요", relId), Util.f("../article/detail?id=%d", relId));
-//		} else {
-//			return Util.jsReplace(Util.f("%d번 글에 싫어요", relId), Util.f("../article/detail?id=%d", relId));
-//		}
-//	}
+@Controller
+public class UsrSaveEventArticleController {
+
+	private SaveEventArticleService saveEventArticleService;
+	private Rq rq;
+	
+	@Autowired
+	public UsrSaveEventArticleController(SaveEventArticleService saveEventArticleService, Rq rq) {
+		this.saveEventArticleService = saveEventArticleService;
+		this.rq = rq;
+	}
+	
+	@RequestMapping("/usr/saveEventArticle/getSaveEventArticle")
+	@ResponseBody
+	public SaveEventArticle getSaveEventArticle(int relId, String relTypeCode) {
+		
+		SaveEventArticle saveEventArticle = saveEventArticleService.getSaveEventArticle(rq.getLoginedMemberId(), relId, relTypeCode);
+		
+		return saveEventArticle;
+	}
+	
+	@RequestMapping("/usr/saveEventArticle/doInsertSaveEventArticle")
+	@ResponseBody
+	public void doInsertSaveEventArticle(int relId, String relTypeCode){
+		
+		
+		SaveEventArticle saveEventArticle = saveEventArticleService.getSaveEventArticle(rq.getLoginedMemberId(), relId, relTypeCode);
+		
+		if (saveEventArticle != null) {
+			saveEventArticleService.doDeleteSaveEventArticle(rq.getLoginedMemberId(), relId, relTypeCode);
+		}
+		
+		saveEventArticleService.doInsertSaveEventArticle(rq.getLoginedMemberId(), relId, relTypeCode);
+		
+	}
+	
+	@RequestMapping("/usr/saveEventArticle/doDeleteSaveEventArticle")
+	@ResponseBody
+	public void doDeleteSaveEventArticle(int relId, String relTypeCode) {
+		
+		saveEventArticleService.doDeleteSaveEventArticle(rq.getLoginedMemberId(), relId, relTypeCode);
+		
+	}
+	
+}
 //	
 //	
 //	

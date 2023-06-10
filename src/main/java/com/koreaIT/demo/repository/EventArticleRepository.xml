@@ -10,10 +10,59 @@
 			WHERE id = #{id}
 	</update>
 	
-	<select id="getEventArticlesToSearchKeyword" resultType="EventArticle">
-		SELECT *
+	<select id="getEventArticles" parameterType="List" resultType="EventArticle">
+		SELECT EA.* 
+				, IFNULL(SEA.save, 0) AS save
 			FROM event_Article AS EA
+			LEFT JOIN (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = #{loginedMemberId}) AS SEA
+			ON EA.id = SEA.relId
 			WHERE 1 = 1	
+			<if test="checkKeyword != ''">
+				AND EA.section IN 
+				<foreach collection="param1" index="index" item="section" open="(" close=")" separator=",">
+	 				'${section}'
+				</foreach>
+			</if>
+			<if test="searchKeyword != ''">
+				<choose>
+					<when test="searchKeywordType == 'name'">
+						AND EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'section'">
+						AND EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'goods'">
+						AND EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'needs'">
+						AND EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					</when>
+					<when test="searchKeywordType == 'price'">
+						AND EA.price = #{searchKeyword}
+					</when>
+					<otherwise>
+						AND (
+							EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+							OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+						)
+					</otherwise>
+				</choose>
+			</if>
+			ORDER BY EA.id
+	</select>
+	<select id="getEventArticlesCnt" parameterType="List" resultType="int">
+		SELECT COUNT(*) 
+			FROM event_Article AS EA
+			WHERE 1 = 1
+			<if test="checkKeyword != ''">
+				AND EA.section IN 
+				<foreach collection="param1" index="index" item="section" open="(" close=")" separator=",">
+	 				'${section}'
+				</foreach>
+			</if>
 			<if test="searchKeyword != ''">
 				<choose>
 					<when test="searchKeywordType == 'name'">
@@ -43,60 +92,6 @@
 				</choose>
 			</if>
 	</select>
-	<select id="getEventArticlesCntToSearchKeyword" resultType="int">
-		SELECT COUNT(*) 
-			FROM event_Article AS EA
-			WHERE 1 = 1	
-			<if test="searchKeyword != ''">
-				<choose>
-					<when test="searchKeywordType == 'name'">
-						AND EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordType == 'section'">
-						AND EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordType == 'goods'">
-						AND EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordType == 'needs'">
-						AND EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
-					</when>
-					<when test="searchKeywordType == 'price'">
-						AND EA.price = #{searchKeyword}
-					</when>
-					<otherwise>
-						AND (
-							EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
-							OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
-						)
-					</otherwise>
-				</choose>
-			</if>
-	</select>
-	<select id="getEventArticlesToCheckKeyword" resultType="EventArticle">
-		SELECT * 
-			FROM event_Article AS EA
-			WHERE 1 = 1
-			<if test="checkKeyword != ''">
-			AND section IN 
-				<foreach collection="list" index="index" item="section" open="(" close=")" separator=",">
-	 				#{section}
-				</foreach>
-			</if>
-	</select>
-	<select id="getEventArticlesCntToCheckKeyword" resultType="int">
-		SELECT COUNT(*) 
-			FROM event_Article AS EA
-			WHERE 1 = 1
-			<if test="checkKeyword != ''">
-			AND section IN 
-				<foreach collection="list" index="index" item="section" open="(" close=")" separator=",">
-	 				#{section}
-				</foreach>
-			</if>
-	</select>
+	
 	
 </mapper>

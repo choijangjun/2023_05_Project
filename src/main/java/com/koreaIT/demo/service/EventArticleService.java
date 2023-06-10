@@ -18,30 +18,15 @@ public class EventArticleService {
 		this.eventArticleRepository = eventArticleRepository;
 	}
 	
-	
-	public List<EventArticle> getEventArticlesToSecrchKeyword(String searchKeywordType, String searchKeyword){
+	public List<EventArticle> getEventArticles(List<String> checkKeyword, String searchKeywordType, String searchKeyword, int loginedMemberId){
 		
- 		List<EventArticle> eventArticles = eventArticleRepository.getEventArticlesToSearchKeyword(searchKeywordType, searchKeyword);
- 		
-		return eventArticles;
-	}
-
-
-	public int getEventArticlesCntToSecrchKeyword(String searchKeywordType, String searchKeyword) {
-		return eventArticleRepository.getEventArticlesCntToSearchKeyword(searchKeywordType, searchKeyword);
-	}
-	
-	
-	public List<EventArticle> getEventArticlesToCheckKeyword(List<String> checkKeyword){
-		
-		List<EventArticle> eventArticles = eventArticleRepository.getEventArticlesToCheckKeyword(checkKeyword);
+		List<EventArticle> eventArticles = eventArticleRepository.getEventArticles(checkKeyword , searchKeywordType, searchKeyword, loginedMemberId);
 		
 		return eventArticles;
 	}
 	
-	
-	public int getEventArticlesCntToCheckKeyword(List<String> checkKeyword) {
-		return eventArticleRepository.getEventArticlesCntToCheckKeyword(checkKeyword);
+	public int getEventArticlesCnt(List<String> checkKeyword, String searchKeywordType, String searchKeyword) {
+		return eventArticleRepository.getEventArticlesCnt(checkKeyword, searchKeywordType, searchKeyword);
 	}
 
 	public void increaseHitCount(int id) {
