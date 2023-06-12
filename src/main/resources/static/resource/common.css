@@ -65,7 +65,7 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 }
 
 .search-input:focus {
-	outline:1px solid blue;
+	outline:1px solid #4948FF;
 }
 
 .search-icon {
@@ -96,7 +96,7 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 
 .layer-section {
 	position: absolute;
-	border: 1px solid #F3F3F3;
+	border: 1px solid #5D5D5D;
 	border-radius: 5px;
 	width: 300px;
 	background-color: #fff;
@@ -187,10 +187,8 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 .list-save-icon {
 	font-size: 30px;
 	position: relative;
+	color: #FFFF48;
 	
-}
-.list-save-span {
-
 }
 
 div {
@@ -225,7 +223,10 @@ div {
 	font-size: 17px;
 	padding: 8px 0;
 }
-
+.myPage-left-ul{
+	font-weight: light;
+	font-size: 14px;
+}
 /* myPage-center css */
 /* myPage-center css */
 /* myPage-center css */
@@ -248,12 +249,28 @@ div {
 	position: relative;
 }
 .myPage-eventArticle-div{
+	display: flex;
     margin-bottom: 30px;
     border-bottom: 2px solid #489CFF;
 }
 .myPage-eventArticle-li {
 	position: relative;
-    display: inline-block;
+    float: left;
+    list-style: none;
+    margin: -2px;
+  
+}
+
+.li-space{
+	width: 100px;
+}
+.myPage-eventArticle-button {
+   	width: 200px;
+    height: 54px;
+   	text-align: center;
+   	background-color: #EAEAEA;
+   	border: 2px solid #D8D8D8;
+   	border-bottom: 2px solid #489CFF;
 }
 .myPage-eventArticle-li-a {
 	display: block;
@@ -269,4 +286,9 @@ div {
 	border-bottom: 1px solid #B7B7B7;
 	text-align: left;
 }
-
+.myEventArticle-table-div th {
+	text-align: center;
+}
+.myEventArticle-table-div td {
+	text-align: center;
+}

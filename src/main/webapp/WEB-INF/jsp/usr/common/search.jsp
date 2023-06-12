@@ -21,14 +21,14 @@
 				
 				<div class="flex">
 					<div class="search-section-div">
-						<div>
-							<button id="search-button-title" class="search-button-title" onclick="doDisplay()">
+						<div >
+							<button id="search-button-title" class="search-button-title">
 								<span class="mx-2">분야</span>
-								<i class="fa-solid fa-caret-down "></i>
+								<i id="arrow" class="fa-solid fa-caret-down "></i>
 							</button>
 						</div>
 						<div id="layer-section" class="layer-section" >
-							<div class="layer-section-in ">
+							<div id="layer-section-in" class="layer-section-in ">
 								<h1>분야</h1>
 								<p>중복선택이 가능합니다.</p>
 								<form action="/usr/eventArticle/listEventArticle" method="get">
@@ -58,29 +58,38 @@
 		</div>
 	</section>
 <script>
-//     function doDisplay(){
-    	
-//     	if($('#layer-section').css('display') == 'block'){
-//     		$('#layer-section').hide();
-//     	} else {
-//     		$('#layer-section').show();
-//     	}
-//     }
-</script>
-<script>
 	$(function(){
-		var layerSection = $("#layer-section"); 
-		$(document).on("click", "#search-button-title", function (e){
+		var layerSection = $("#layer-section");
+		var buttonSection = $("#search-button-title");
+		var arrow =$("#arrow");
+		$(document).mouseup(function (e){
+		    if(layerSection.has(e.target).length == 0) {
+		    	layerSection.hide();
+		    	buttonSection.css({
+					"color": "inherit ",
+					"border": "1px solid #F3F3F3"
+				});
+		    	arrow.removeClass("fa-flip-vertical");
+		    } 
+		});
+		
+		$(document).on("click", "#search-button-title", function (){
 			if(layerSection.css('display') == 'block'){
 				layerSection.hide();
-	    	} else {
-	    		layerSection.show();
-	    	}
-		});
-		$(document).mouseup(function (e){
-		    if(layerSection.has(e.layerSection).length==0) {
-		    	layersection.hide();
-		    } 
+				buttonSection.css({
+					"color": "inherit ",
+					"border": "1px solid #F3F3F3"
+				});
+				arrow.removeClass("fa-flip-vertical");
+			} else {
+				layerSection.show();
+				buttonSection.css({
+					"color": "#489CFF",
+					"border": "1px solid #489CFF"
+				});
+				arrow.addClass("fa-flip-vertical");
+				
+			}
 		});
 		
 	});

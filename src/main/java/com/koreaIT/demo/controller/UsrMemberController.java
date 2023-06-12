@@ -126,6 +126,11 @@ public class UsrMemberController {
 		return "usr/member/myPage";
 	}
 	
+	@RequestMapping("/usr/myPage/myPersonalData")
+	public String showMyPesonalData() {
+		return "usr/myPage/myPersonalData";
+	}
+	
 	@RequestMapping("/usr/member/checkPassword")
 	public String checkPassword() {
 		return "usr/member/checkPassword";

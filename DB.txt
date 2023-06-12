@@ -350,9 +350,11 @@ TRUNCATE saveEventArticle;
 SELECT * FROM saveEventArticle;
 
 SELECT EA.*
-				, IFNULL(SEA.save, 0)
+				, IFNULL(SEA.save, 0) AS save
 			FROM event_Article AS EA
-			LEFT JOIN saveEventArticle AS SEA
+			LEFT JOIN (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2) AS SEA
 			ON EA.id = SEA.relId
 			WHERE 1 = 1
-			ORDER BY id;
+			ORDER BY EA.id;
+			
+(SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2);
