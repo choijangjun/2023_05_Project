@@ -20,11 +20,17 @@
 							</ul>
 						</div>
 					</div>
-					<article>
+					<article class="myEventArticle-article">
+						<div>
+							<div class="saveEventArticle-delete-div">
+								<button class="saveEventArticle-delete">삭제</button>
+							</div>
+						</div>
 						<div class="myEventArticle-table-div">
-							<table>
+							<table class="myEventArticle-table">
 								<colgroup>
 									<col width="30px"/>
+									<col width="250px"/>
 									<col/>
 									<col width="100px"/>
 									<col width="100px"/>
@@ -33,32 +39,33 @@
 								</colgroup>
 								<thead>
 									<tr>
-										<th scope="col"><input type="checkbox" /></th>
+										<th scope="col"><input id="saveEventCheckBoxCol" type="checkbox" /></th>
 										<th scope="col">이벤트 기간</th>
-										<th scope="col">진행여부</th>
 										<th scope="col">기업명</th>
 										<th scope="col">상품</th>
 										<th scope="col">조건</th>
+										<th scope="col">가격</th>
+										<th scope="col">진행여부</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="saveEventArticle" items="${saveEventArticles }">
 										<tr>
-											<td><input type="checkbox" /></td>
+											<td><input id="saveEventCheckBox" type="checkbox" /></td>
 											<td>${saveEventArticle.period }</td>
-											<td>진행중</td>
-											<td>${saveEventArticle.name }</td>
+											<td style="font-weight: bold"><a href="${saveEventArticle.site}">${saveEventArticle.name }</a></td>
 											<td>${saveEventArticle.goods }</td>
 											<td>${saveEventArticle.needs }</td>
+											<td>${saveEventArticle.price }</td>
+											<td style="color: green">진행중</td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<div>
-								<div>
-									<button></button>
-									<button></button>
-								</div>
+						</div>
+						<div >
+							<div class="saveEventArticle-delete-div">
+								<button class="saveEventArticle-delete">삭제</button>
 							</div>
 						</div>
 					</article>
@@ -137,6 +144,31 @@
 				"border-bottom": "2px solid #489CFF",
 				"background-color": "#EAEAEA"
 			});
+		});
+	});
+</script>
+
+<script>
+ $(function(){
+	 $("#myPage-left-myEventArticle").css({
+		 "color": "#489CFF"
+	 });
+ });
+</script>
+
+<script>
+	$(function() {
+		$("#saveEventCheckBoxCol").click(function() {
+			if($("#saveEventCheckBoxCol").is(":checked")) $("input[id=saveEventCheckBox]").prop("checked", true);
+			else $("input[id=saveEventCheckBox]").prop("checked", false);
+		});
+	
+		$("input[id=saveEventCheckBox]").click(function() {
+			var total = $("input[id=saveEventCheckBox]").length;
+			var checked = $("input[id=saveEventCheckBox]:checked").length;
+	
+			if(total != checked) $("#saveEventCheckBoxCol").prop("checked", false);
+			else $("#saveEventCheckBoxCol").prop("checked", true); 
 		});
 	});
 </script>

@@ -50,3 +50,11 @@
 	</section>
 </div>
 <%@ include file="../common/foot.jsp" %>
+
+<script>
+ $(function(){
+	 $("#myPage-left-personalData").css({
+		 "color": "#489CFF"
+	 });
+ });
+</script>
