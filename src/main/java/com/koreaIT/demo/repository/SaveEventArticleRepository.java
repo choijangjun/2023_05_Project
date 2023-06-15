@@ -17,7 +17,9 @@ public interface SaveEventArticleRepository {
 
 	public SaveEventArticle getSaveEventArticle(int loginedMemberId, int relId, String relTypeCode);
 
-	public List<EventArticle> getSaveEventArticles(int loginedMemberId);
+	public List<EventArticle> getSaveEventArticles(int loginedMemberId, String searchKeyword, int limitStart, int itemsInAPage);
+
+	public int getSaveEventArticleCnt(int loginedMemberId, String searchKeyword);
 
 	
 }

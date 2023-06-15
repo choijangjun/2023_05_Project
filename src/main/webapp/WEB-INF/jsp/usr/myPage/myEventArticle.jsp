@@ -21,9 +21,15 @@
 						</div>
 					</div>
 					<article class="myEventArticle-article">
-						<div>
-							<div class="saveEventArticle-delete-div">
-								<button class="saveEventArticle-delete">삭제</button>
+						<div class="myEventArticle-article-head">
+							<div class="myEventArticle-search-input-div">
+								<form class="flex"action="/usr/myPage/myEventArticle">
+									<input class="myEventArticle-search-input" name="searchKeyword" placeholder="기업명, 조건, 상품 등 검색" maxlength="20" value="${searchKeyword}" />
+									<button class="myEventArticle-search-button"><i class="text-xl fa-solid fa-magnifying-glass"></i></button>
+								</form>
+							</div>
+							<div class="myEventArticle-delete-div">
+								<button class="myEventArticle-delete-button">삭제</button>
 							</div>
 						</div>
 						<div class="myEventArticle-table-div">
@@ -57,15 +63,28 @@
 											<td>${saveEventArticle.goods }</td>
 											<td>${saveEventArticle.needs }</td>
 											<td>${saveEventArticle.price }</td>
-											<td style="color: green">진행중</td>
+											<td style="color: #6BEC62; font-size: 5px"><i class="fa-solid fa-circle"></i></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</div>
-						<div >
-							<div class="saveEventArticle-delete-div">
-								<button class="saveEventArticle-delete">삭제</button>
+						<div class="myEventArticle-article-foot">
+							<div class="page-click-div">
+								<c:set var="endPage" value="${startPage + 9 <= pagesCount ? startPage + 9 : pagesCount }"/>
+								<c:set var="pageBaseUri" value="?searchKeyword=${searchKeyword }"/>
+								<c:if test="${startPage != 1}">
+									<a class=" page-click" href="${pageBaseUri }&page=${startPage - 10}"><i class="page-click-span fa-solid fa-chevron-right fa-flip-horizontal"></i></a>
+								</c:if>
+								<c:forEach begin="${startPage }" end="${endPage }" var="i">
+									<a id="page-click${i}" class="page-click" href="${pageBaseUri }&page=${i }"><span class="page-click-span">${i }</span></a>
+								</c:forEach>
+								<c:if test="${startPage + 9 < pagesCount}">
+									<a class=" page-click" href="${pageBaseUri }&page=${startPage + 10}"><i class=" page-click-span fa-solid fa-chevron-right"></i></a>
+								</c:if>
+							</div>
+							<div class="myEventArticle-delete-div">
+								<button class="myEventArticle-delete-button">삭제</button>
 							</div>
 						</div>
 					</article>
@@ -75,6 +94,19 @@
 		</section>
 	</div>
 <%@ include file="../common/foot.jsp" %>
+<script>
+	$(function(){
+		$("#page-click${page }").css({
+			"border": "1px solid #000"
+		});
+	});
+</script>
+<script>
+	$(document).ready(function(){
+	
+		$(".myEventArticle-search-input").focus();
+	});
+</script>
 <script>
 	$(document).ready(function(){
 	
@@ -147,6 +179,8 @@
 		});
 	});
 </script>
+
+
 
 <script>
  $(function(){

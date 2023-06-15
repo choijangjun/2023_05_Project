@@ -11,6 +11,24 @@
 			AND relTypeCode = #{relTypeCode}
 	</select>
 	
+	<select id="getSaveEventArticleCnt" resultType="int">
+		SELECT COUNT(*)
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+	</select>
+	
 	<select id="getSaveEventArticles" resultType="EventArticle">
 		SELECT EA.* 
 		        , IFNULL(SEA.save, 0) AS save
@@ -18,7 +36,17 @@
 		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
 		    ON EA.id = SEA.relId
 		    WHERE SEA.save = 1
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
 		    ORDER BY SEA.regDate DESC
+		    LIMIT #{limitStart}, #{itemsInAPage}
 	</select>
 	
 	<insert id="doInsertSaveEventArticle">

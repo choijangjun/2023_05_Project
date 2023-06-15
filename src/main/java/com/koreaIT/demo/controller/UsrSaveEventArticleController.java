@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.SaveEventArticleService;
@@ -35,13 +36,27 @@ public class UsrSaveEventArticleController {
 	}
 	
 	@RequestMapping("/usr/myPage/myEventArticle")
-	public String showSaveList(Model model) {
+	public String showSaveList(Model model, @RequestParam(defaultValue = "1") int page, 
+			@RequestParam(defaultValue = "") String searchKeyword) {
 		
-		List<EventArticle> saveEventArticles = saveEventArticleService.getSaveEventArticles(rq.getLoginedMemberId());
+		int saveEventArticleCnt = saveEventArticleService.getSaveEventArticleCnt(rq.getLoginedMemberId(), searchKeyword);
+
+		int itemsInAPage = 15;
 		
+		int pagesCount = (int) Math.ceil((double) saveEventArticleCnt / itemsInAPage);
+		
+		int pagesInASaveEvent = 10;
+		
+		int startPage = (int) Math.floor((double) page / pagesInASaveEvent) * pagesInASaveEvent + 1;
+		System.out.println(startPage);
+		System.out.println(pagesCount);
+		List<EventArticle> saveEventArticles = saveEventArticleService.getSaveEventArticles(rq.getLoginedMemberId(), searchKeyword, itemsInAPage, page);
+		
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("pagesCount", pagesCount);
+		model.addAttribute("page", page);
+		model.addAttribute("saveEventArticleCnt", saveEventArticleCnt);
 		model.addAttribute("saveEventArticles", saveEventArticles);
-		
-		System.out.println(saveEventArticles);
 		
 		return "usr/myPage/myEventArticle";
 	}

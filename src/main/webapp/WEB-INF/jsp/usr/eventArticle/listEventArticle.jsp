@@ -9,7 +9,7 @@
 			return;
 		}
 	</script>
-	<section class="pt-44 ">
+	<section class="listEventArticle-main">
 		<div class="mx-auto ">
 			<div><span>진행중인 이벤트 : ${eventArticlesCnt } 개</span></div>
 			<div class="ml-6">실시간 가장 핫한 이벤트</div>

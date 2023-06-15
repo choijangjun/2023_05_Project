@@ -157,6 +157,9 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 /* eventArticle_list css 처리 */
 /* eventArticle_list css 처리 */
 /* eventArticle_list css 처리 */
+.listEventArticle-main {
+	margin-top: 25px;
+}
 .main-img-a {
 	display: inline-block;
 }
@@ -200,10 +203,11 @@ div {
 .myPage-wrap{
 	position: relative;
 	width: 100%;
-	padding-top: 176px;
-	margin: 0 auto;
+	overflow: hidden;
+    margin: 25px auto 0 auto;
 	text-align: left;
 }
+
 
 .container-box {
 	position: relative;
@@ -231,7 +235,7 @@ div {
 }
 
 .myPage-left-ul > li:hover{
-	text-decoration: underline;
+	color: #489CFF;
 }
 /* myPage-center css */
 /* myPage-center css */
@@ -239,6 +243,8 @@ div {
 .myPage-center-section{
 	float: right;
 	text-align: left;
+	display: block;
+	background-color: #fff;
 }
 .myPage-center-div{
 	position: relative;
@@ -295,10 +301,6 @@ div {
 	border-bottom: 1px solid #B7B7B7;
 	text-align: left;
 }
-
-.myEventArticle-table-div {
-}
-
 .myEventArticle-table-div th {
 	text-align: center;
 	border: 1px solid #F3F3F3;
@@ -325,12 +327,66 @@ div {
 	position: relative;
     top: 3px;
 }
-.saveEventArticle-delete-div{
-	text-align: right;
+.myEventArticle-article-head{
+	display: flex;	
+	justify-content: space-between;
+    align-items: center;
 }
-.saveEventArticle-delete{
-	padding: 10px 25px;
+.myEventArticle-search-input-div{
+	display: inline-block;
+	margin-right: 150px ;
+	border: 1px solid #B7B7B7;
+}
+.myEventArticle-search-input {
+	width: 180px;
+	height: 24px;
+}
+
+.myEventArticle-search-input:focus {
+	outline:none;
+}
+
+
+.myEventArticle-search-button{
+	display: flex;
+	align-items: center;
+}
+
+.myEventArticle-delete-div{
+	margin: auto 0 auto auto;
+}
+
+.myEventArticle-delete-button{
+	padding: 7px 15px;
 	margin: 15px 10px;
 	border: 1px solid #D8D8D8;
 	background-color: #EAEAEA;
 }
+.myEventArticle-article-foot{
+	display: flex;
+    align-items: center;
+}
+.page-click-div{
+	margin-left: 270px; 
+}
+.page-click{
+	display: inline-block;
+	text-align: center;
+}
+
+.page-click-span {
+	display: block;
+	line-height: 30px;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #fff;
+	font-size: 15px;
+	
+}
+.page-click-span:hover {
+	border: 1px solid #E4E4E4;
+}
+body {
+	background-color: #f6f6f6;
+}
+

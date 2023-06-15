@@ -14,7 +14,6 @@
 			<div class="mb-2  items-center flex">
 				<form action="/usr/eventArticle/listEventArticle" class=" flex">
 					<input class="search-input ml-5 pl-5 text-xl " name="searchKeyword" placeholder="찾으시는 이벤트를 검색해주세요" maxlength="20" value="${searchKeyword}"/>
-					
 					<button class="search-icon btn-text-link btn btn-active"><i class="text-xl fa-solid fa-magnifying-glass"></i></button>
 					<%-- <input type="hidden" name="boardId" value="${board.id }"/> --%>
 				</form>
