@@ -48,40 +48,40 @@
 							</div>
 						</div>
 						<script>
-							var save = ${eventArticle.save};
-							$('#save-btn${eventArticle.id}').click(function(){
+// 							var save = ${eventArticle.save};
+// 							$('#save-btn${eventArticle.id}').click(function(){
 								
-								if(save != 1){
-									$.ajax({
-										type: "get"
-										, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
-										, dataType : "text"
-										, success: function(data) {
-		 									let saveIcon = $('#non-saved-icon${eventArticle.id}');
-		 									saveIcon.removeClass("fa-regular");
-		 									saveIcon.addClass("fa-solid");
-		 									saveIcon.attr('id', 'saved-icon${eventArticle.id}');
+// 								if(save != 1){
+// 									$.ajax({
+// 										type: "get"
+// 										, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+// 										, dataType : "text"
+// 										, success: function(data) {
+// 		 									let saveIcon = $('#non-saved-icon${eventArticle.id}');
+// 		 									saveIcon.removeClass("fa-regular");
+// 		 									saveIcon.addClass("fa-solid");
+// 		 									saveIcon.attr('id', 'saved-icon${eventArticle.id}');
 		 									
-										}
-									});
-									save = 1;
-								} else if(save == 1){
-									$.ajax({
-										type: "get"
-										, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
-										, dataType : "text"
-										, success: function(data) {
-											console.log(data);
-		 									let saveIcon = $('#saved-icon${eventArticle.id}');
-		 									saveIcon.removeClass("fa-solid");
-		 									saveIcon.addClass("fa-regular");
-		 									saveIcon.attr('id', 'non-saved-icon${eventArticle.id}');
-										}
+// 										}
+// 									});
+// 									save = 1;
+// 								} else if(save == 1){
+// 									$.ajax({
+// 										type: "get"
+// 										, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+// 										, dataType : "text"
+// 										, success: function(data) {
+// 											console.log(data);
+// 		 									let saveIcon = $('#saved-icon${eventArticle.id}');
+// 		 									saveIcon.removeClass("fa-solid");
+// 		 									saveIcon.addClass("fa-regular");
+// 		 									saveIcon.attr('id', 'non-saved-icon${eventArticle.id}');
+// 										}
 										
-									});
-									save = 0;
-								}
-							});
+// 									});
+// 									save = 0;
+// 								}
+// 							});
 							
 						</script>
 				</c:forEach>
@@ -90,4 +90,82 @@
 	</section>
 
 <%@ include file="../common/foot.jsp" %>
-
+<script>
+	<c:forEach items="${eventArticles}" var="eventArticle">
+		$(function(){
+		
+		var save = '${eventArticle.save}';
+		$(document).on("click", "button[id='save-btn${eventArticle.id}']", function() {
+			if(save != 1){
+				save = 1;
+				$.ajax({
+					type: "get"
+					, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+					, dataType : "text"
+					, success: function(data) {
+							let saveIcon = $('#non-saved-icon${eventArticle.id}');
+							saveIcon.removeClass("fa-regular");
+							saveIcon.addClass("fa-solid");
+							saveIcon.attr('id', 'saved-icon${eventArticle.id}');
+							
+					}
+				});
+				
+			} else if(save == 1){
+				save = 0;
+				$.ajax({
+					type: "get"
+					, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+					, dataType : "text"
+					, success: function(data) {
+						console.log(data);
+							let saveIcon = $('#saved-icon${eventArticle.id}');
+							saveIcon.removeClass("fa-solid");
+							saveIcon.addClass("fa-regular");
+							saveIcon.attr('id', 'non-saved-icon${eventArticle.id}');
+							
+						}
+					});
+				}
+			});
+		});
+	</c:forEach>
+</script>
+<script>
+// 	<c:forEach items="${eventArticles}" var="eventArticle">
+// 		var save = ${eventArticle.save};
+// 		$('#save-btn${eventArticle.id}').click(function(){
+			
+// 			if(save != 1){
+// 				$.ajax({
+// 					type: "get"
+// 					, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+// 					, dataType : "text"
+// 					, success: function(data) {
+// 							let saveIcon = $('#non-saved-icon${eventArticle.id}');
+// 							saveIcon.removeClass("fa-regular");
+// 							saveIcon.addClass("fa-solid");
+// 							saveIcon.attr('id', 'saved-icon${eventArticle.id}');
+							
+// 					}
+// 				});
+// 				save = 1;
+// 			} else if(save == 1){
+// 				$.ajax({
+// 					type: "get"
+// 					, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+// 					, dataType : "text"
+// 					, success: function(data) {
+// 						console.log(data);
+// 							let saveIcon = $('#saved-icon${eventArticle.id}');
+// 							saveIcon.removeClass("fa-solid");
+// 							saveIcon.addClass("fa-regular");
+// 							saveIcon.attr('id', 'non-saved-icon${eventArticle.id}');
+// 					}
+					
+// 				});
+// 				save = 0;
+// 			}
+// 		});
+// 	</c:forEach>
+</script>
