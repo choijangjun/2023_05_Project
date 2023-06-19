@@ -13,4 +13,7 @@ public interface EventArticleRepository {
 
 	public List<EventArticle> getEventArticles(List<String> checkKeyword, String searchKeywordType, String searchKeyword, int loginedMemberId); 
 	public int getEventArticlesCnt(List<String> checkKeyword, String searchKeywordType, String searchKeyword);
+
+	void updateEventArticlePG();
+
 }

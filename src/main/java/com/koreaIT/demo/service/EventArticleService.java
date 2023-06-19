@@ -33,5 +33,9 @@ public class EventArticleService {
 		eventArticleRepository.increaseHitCount(id);
 	}
 
+	public void updateEventArticlePG() {
+		eventArticleRepository.updateEventArticlePG();
+	}
+
 	
 }

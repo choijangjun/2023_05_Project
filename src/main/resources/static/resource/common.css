@@ -190,7 +190,7 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 .list-save-icon {
 	font-size: 30px;
 	position: relative;
-	color: #FFFF48;
+	color: #FFE400;
 	
 }
 
@@ -385,6 +385,12 @@ div {
 }
 .page-click-span:hover {
 	border: 1px solid #E4E4E4;
+}
+.myEventArticle-goSite{ 
+	font-weight: bold;
+}
+.myEventArticle-goSite:hover{
+	color: #489CFF;
 }
 body {
 	background-color: #f6f6f6;

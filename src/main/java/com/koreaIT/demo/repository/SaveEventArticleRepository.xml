@@ -29,6 +29,44 @@
 		    ORDER BY SEA.regDate DESC
 	</select>
 	
+	<select id="getProgressSaveEventArticleCnt" resultType="int">
+		SELECT COUNT(*)
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    AND progress = 1
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+	</select>
+	
+	<select id="getEndSaveEventArticleCnt" resultType="int">
+		SELECT COUNT(*)
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    AND progress = 0
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+	</select>
+	
 	<select id="getSaveEventArticles" resultType="EventArticle">
 		SELECT EA.* 
 		        , IFNULL(SEA.save, 0) AS save
@@ -36,6 +74,48 @@
 		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
 		    ON EA.id = SEA.relId
 		    WHERE SEA.save = 1
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+		    LIMIT #{limitStart}, #{itemsInAPage}
+	</select>
+	
+	<select id="getProgressSaveEventArticles" resultType="EventArticle">
+		SELECT EA.* 
+		        , IFNULL(SEA.save, 0) AS save
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    AND EA.progress = 1
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.section LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+		    LIMIT #{limitStart}, #{itemsInAPage}
+	</select>
+	
+	<select id="getEndSaveEventArticles" resultType="EventArticle">
+		SELECT EA.* 
+		        , IFNULL(SEA.save, 0) AS save
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    AND EA.progress = 0
 		    <if test="searchKeyword != ''">
 		    	AND (
 					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')

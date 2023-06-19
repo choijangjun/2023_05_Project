@@ -11,7 +11,7 @@
 					<div class ="myPage-head-div">
 						<h2 class ="myPage-head-h2">저장한 이벤트</h2>
 					</div>
-					<div class="myPage-eventArticle">
+					<div id="myPage-eventArticle" class="myPage-eventArticle">
 						<div class="myPage-eventArticle-div">
 							<ul>
 								<li class="myPage-eventArticle-li"><button id="savedEventArticle" class="myPage-eventArticle-button">전체 이벤트</button></li>
@@ -20,7 +20,7 @@
 							</ul>
 						</div>
 					</div>
-					<article class="myEventArticle-article">
+					<article id="myEventArticle-article" class="myEventArticle-article">
 						<div class="myEventArticle-article-head">
 							<div class="myEventArticle-search-input-div">
 								<form class="flex"action="/usr/myPage/myEventArticle">
@@ -29,7 +29,7 @@
 								</form>
 							</div>
 							<div class="myEventArticle-delete-div">
-								<button class="myEventArticle-delete-button">삭제</button>
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
 							</div>
 						</div>
 						<div class="myEventArticle-table-div">
@@ -51,19 +51,24 @@
 										<th scope="col">상품</th>
 										<th scope="col">조건</th>
 										<th scope="col">가격</th>
-										<th scope="col">진행여부</th>
+										<th scope="col">진행</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="saveEventArticle" items="${saveEventArticles }">
-										<tr>
-											<td><input id="saveEventCheckBox" type="checkbox" /></td>
-											<td>${saveEventArticle.period }</td>
-											<td style="font-weight: bold"><a href="${saveEventArticle.site}">${saveEventArticle.name }</a></td>
+										<tr id="saveEvent-Tbody${saveEventArticle.id}">
+											<td><input id="saveEventCheckBox" class="saveEventCheckBox${saveEventArticle.id}" type="checkbox" name="saveEventCheckBox"  value="${saveEventArticle.id}"/></td>
+											<td>${saveEventArticle.startDate.substring(2,16) } ~ <br /> ${saveEventArticle.endDate.substring(2,16) }</td>
+											<td class="myEventArticle-goSite"><a href="${saveEventArticle.site}">${saveEventArticle.name }</a></td>
 											<td>${saveEventArticle.goods }</td>
 											<td>${saveEventArticle.needs }</td>
 											<td>${saveEventArticle.price }</td>
-											<td style="color: #6BEC62; font-size: 5px"><i class="fa-solid fa-circle"></i></td>
+											<c:if test="${saveEventArticle.progress == 1}">
+												<td style="color: #47C83E; font-size: 5px"><i class="fa-solid fa-circle"></i></td>
+											</c:if>
+											<c:if test="${saveEventArticle.progress != 1}">
+												<td style="color: #FF0000; font-size: 5px"><i class="fa-solid fa-circle"></i></td>
+											</c:if>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -84,7 +89,143 @@
 								</c:if>
 							</div>
 							<div class="myEventArticle-delete-div">
-								<button class="myEventArticle-delete-button">삭제</button>
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+							</div>
+						</div>
+					</article>
+					<article id="myEventArticle-progressArticle" class="myEventArticle-article">
+						<div class="myEventArticle-article-head">
+							<div class="myEventArticle-search-input-div">
+								<form class="flex"action="/usr/myPage/myEventArticle">
+									<input class="myEventArticle-search-input" name="searchKeyword" placeholder="기업명, 조건, 상품 등 검색" maxlength="20" value="${searchKeyword}" />
+									<button class="myEventArticle-search-button"><i class="text-xl fa-solid fa-magnifying-glass"></i></button>
+								</form>
+							</div>
+							<div class="myEventArticle-delete-div">
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+							</div>
+						</div>
+						<div class="myEventArticle-table-div">
+							<table class="myEventArticle-table">
+								<colgroup>
+									<col width="30px"/>
+									<col width="250px"/>
+									<col/>
+									<col width="100px"/>
+									<col width="100px"/>
+									<col width="100px"/>
+									<col width="100px"/>
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col"><input id="saveEventCheckBoxCol" type="checkbox" /></th>
+										<th scope="col">이벤트 기간</th>
+										<th scope="col">기업명</th>
+										<th scope="col">상품</th>
+										<th scope="col">조건</th>
+										<th scope="col">가격</th>
+										<th scope="col">진행</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="progressSaveEventArticle" items="${progressSaveEventArticles }">
+										<tr id="saveEvent-Tbody${progressSaveEventArticle.id}">
+											<td><input id="saveEventCheckBox" class="saveEventCheckBox${progressSaveEventArticle.id}" type="checkbox" name="saveEventCheckBox"  value="${saveEventArticle.id}"/></td>
+											<td>${progressSaveEventArticle.startDate.substring(2,16) } ~ <br /> ${progressSaveEventArticle.endDate.substring(2,16) }</td>
+											<td class="myEventArticle-goSite"><a href="${progressSaveEventArticle.site}">${progressSaveEventArticle.name }</a></td>
+											<td>${progressSaveEventArticle.goods }</td>
+											<td>${progressSaveEventArticle.needs }</td>
+											<td>${progressSaveEventArticle.price }</td>
+											<td style="color: #47C83E; font-size: 5px"><i class="fa-solid fa-circle"></i></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div class="myEventArticle-article-foot">
+							<div class="page-click-div">
+								<c:set var="endPage" value="${progressStartPage + 9 <= progressPagesCount ? progressStartPage + 9 : progressPagesCount }"/>
+								<c:set var="pageBaseUri" value="?searchKeyword=${searchKeyword }"/>
+								<c:if test="${progressStartPage != 1}">
+									<a class=" page-click" href="${pageBaseUri }&page=${startPage - 10}"><i class="page-click-span fa-solid fa-chevron-right fa-flip-horizontal"></i></a>
+								</c:if>
+								<c:forEach begin="${progressStartPage }" end="${endPage }" var="i">
+									<a id="progress-page-click${i}" class="page-click" href="${pageBaseUri }&page=${i }"><span class="page-click-span">${i }</span></a>
+								</c:forEach>
+								<c:if test="${progressStartPage + 9 < progressPagesCount}">
+									<a class="page-click" href="${pageBaseUri }&page=${progressStartPage + 10}"><i class=" page-click-span fa-solid fa-chevron-right"></i></a>
+								</c:if>
+							</div>
+							<div class="myEventArticle-delete-div">
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+							</div>
+						</div>
+					</article>
+					<article id="myEventArticle-endArticle" class="myEventArticle-article">
+						<div class="myEventArticle-article-head">
+							<div class="myEventArticle-search-input-div">
+								<form class="flex"action="/usr/myPage/myEventArticle">
+									<input class="myEventArticle-search-input" name="searchKeyword" placeholder="기업명, 조건, 상품 등 검색" maxlength="20" value="${searchKeyword}" />
+									<button class="myEventArticle-search-button"><i class="text-xl fa-solid fa-magnifying-glass"></i></button>
+								</form>
+							</div>
+							<div class="myEventArticle-delete-div">
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+							</div>
+						</div>
+						<div class="myEventArticle-table-div">
+							<table class="myEventArticle-table">
+								<colgroup>
+									<col width="30px"/>
+									<col width="250px"/>
+									<col/>
+									<col width="100px"/>
+									<col width="100px"/>
+									<col width="100px"/>
+									<col width="100px"/>
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col"><input id="saveEventCheckBoxCol" type="checkbox" /></th>
+										<th scope="col">이벤트 기간</th>
+										<th scope="col">기업명</th>
+										<th scope="col">상품</th>
+										<th scope="col">조건</th>
+										<th scope="col">가격</th>
+										<th scope="col">진행</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="endSaveEventArticle" items="${endSaveEventArticles }">
+										<tr id="saveEvent-Tbody${endSaveEventArticle.id}">
+											<td><input id="saveEventCheckBox" class="saveEventCheckBox${endSaveEventArticle.id}" type="checkbox" name="saveEventCheckBox"  value="${saveEventArticle.id}"/></td>
+											<td>${endSaveEventArticle.startDate.substring(2,16) } ~ <br /> ${endSaveEventArticle.endDate.substring(2,16) }</td>
+											<td class="myEventArticle-goSite"><a href="${endSaveEventArticle.site}">${endSaveEventArticle.name }</a></td>
+											<td>${endSaveEventArticle.goods }</td>
+											<td>${endSaveEventArticle.needs }</td>
+											<td>${endSaveEventArticle.price }</td>
+											<td style="color: #FF0000; font-size: 5px"><i class="fa-solid fa-circle"></i></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<div class="myEventArticle-article-foot">
+							<div class="page-click-div">
+								<c:set var="endPage" value="${endStartPage + 9 <= endPagesCount ? endStartPage + 9 : endPagesCount }"/>
+								<c:set var="pageBaseUri" value="?searchKeyword=${searchKeyword }"/>
+								<c:if test="${endStartPage != 1}">
+									<a class=" page-click" href="${pageBaseUri }&page=${endStartPage - 10}"><i class="page-click-span fa-solid fa-chevron-right fa-flip-horizontal"></i></a>
+								</c:if>
+								<c:forEach begin="${endStartPage }" end="${endPage }" var="i">
+									<a id="end-page-click${i}" class="page-click" href="${pageBaseUri }&page=${i }"><span class="page-click-span">${i }</span></a>
+								</c:forEach>
+								<c:if test="${endStartPage + 9 < endPagesCount}">
+									<a class=" page-click" href="${pageBaseUri }&page=${endStartPage + 10}"><i class=" page-click-span fa-solid fa-chevron-right"></i></a>
+								</c:if>
+							</div>
+							<div class="myEventArticle-delete-div">
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
 							</div>
 						</div>
 					</article>
@@ -95,10 +236,43 @@
 	</div>
 <%@ include file="../common/foot.jsp" %>
 <script>
+	<c:forEach items="${saveEventArticles}" var="saveEventArticle">
+		$(function(){
+			$(document).on("click", "button[id='myEventArticle-delete-button']", function() {
+				if($('.saveEventCheckBox${saveEventArticle.id}').is(":checked")){
+					$.ajax({
+						type: "get"
+						, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${saveEventArticle.id}&relTypeCode=eventArticle"
+						, dataType : "text"
+						, success: function(data) {
+								$("#saveEvent-Tbody${saveEventArticle.id}").remove();
+						}
+					});
+				}
+				
+			});
+		});
+	</c:forEach>
+</script>
+<script>
 	$(function(){
 		$("#page-click${page }").css({
 			"border": "1px solid #000"
+			
 		});
+		
+		$("html, body").animate({scrollTop: 0});
+		
+		$("#progress-page-click${page }").css({
+			"border": "1px solid #000"
+			
+		});
+		
+		$("#end-page-click${page }").css({
+			"border": "1px solid #000"
+			
+		});
+		
 	});
 </script>
 <script>
@@ -108,8 +282,8 @@
 	});
 </script>
 <script>
-	$(document).ready(function(){
-	
+	$(function(){
+		var set = 3;
 		$("#savedEventArticle").css({
 			"border": "2px solid #489CFF",
 			"border-bottom": "2px solid #FFF",
@@ -118,11 +292,13 @@
 		$("#goSavedEventArticle").css({
 			"border-left": "2px solid #489CFF",
 		});
+		$("#myEventArticle-progressArticle").hide();
+		$("#myEventArticle-endArticle").hide();
 		
-	});
-</script>
-<script>
-	$(function(){
+		if(set == 2){
+			console.log('123123');
+		};
+		
 		$(document).on("click", "#savedEventArticle", function (){
 			$("#savedEventArticle").css({
 				"border": "2px solid #489CFF",
@@ -140,6 +316,13 @@
 				"border-bottom": "2px solid #489CFF",
 				"background-color": "#EAEAEA"
 			});
+			$("#myEventArticle-article").show();
+			$("#myEventArticle-progressArticle").hide();
+			$("#myEventArticle-endArticle").hide();
+			
+			set = 2;
+			
+			
 		});
 		
 		$(document).on("click", "#goSavedEventArticle", function (){
@@ -159,6 +342,12 @@
 				"border-bottom": "2px solid #489CFF",
 				"background-color": "#EAEAEA"
 			});
+			
+			$("#myEventArticle-progressArticle").show();
+			$("#myEventArticle-article").hide();
+			$("#myEventArticle-endArticle").hide();
+			
+			set = 1;
 		});
 		$(document).on("click", "#endSavedEventArticle", function (){
 			$("#endSavedEventArticle").css({
@@ -176,6 +365,11 @@
 				"border-bottom": "2px solid #489CFF",
 				"background-color": "#EAEAEA"
 			});
+			$("#myEventArticle-endArticle").show();
+			$("#myEventArticle-article").hide();
+			$("#myEventArticle-progressArticle").hide();
+			
+			set = 0;
 		});
 	});
 </script>

@@ -21,5 +21,16 @@ public interface SaveEventArticleRepository {
 
 	public int getSaveEventArticleCnt(int loginedMemberId, String searchKeyword);
 
+	public int getProgressSaveEventArticleCnt(int loginedMemberId, String searchKeyword);
+
+	public int getEndSaveEventArticleCnt(int loginedMemberId, String searchKeyword);
+
+	public List<EventArticle> getProgressSaveEventArticles(int loginedMemberId, String searchKeyword, int limitStart,
+			int itemsInAPage);
+
+	public List<EventArticle> getEndSaveEventArticles(int loginedMemberId, String searchKeyword, int limitStart,
+			int itemsInAPage);
+
+
 	
 }

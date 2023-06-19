@@ -29,10 +29,14 @@ public class UsrEventArticleController {
 	public String showList(Model model, @RequestParam(defaultValue = "movie, fashion, dessert") List<String> checkKeyword, 
 			@RequestParam(defaultValue = "name") String searchKeywordType, 
 			@RequestParam(defaultValue = "") String searchKeyword) {
-//		String[] checkKeywords = checkKeyword.split(",");
+		
+		eventArticleService.updateEventArticlePG();
+		
 		List<EventArticle> eventArticles = eventArticleService.getEventArticles(checkKeyword, searchKeywordType, searchKeyword, rq.getLoginedMemberId());
 		
 		int eventArticlesCnt = eventArticleService.getEventArticlesCnt(checkKeyword, searchKeywordType, searchKeyword);
+		
+		
 		
 		model.addAttribute("eventArticlesCnt", eventArticlesCnt);
 		model.addAttribute("eventArticles", eventArticles);

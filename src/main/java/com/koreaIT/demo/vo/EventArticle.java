@@ -22,7 +22,9 @@ public class EventArticle {
 	private String site;
 	private int hitCount;
 	private int save;
-	
+	private String startDate;
+	private String endDate;
+	private int progress;
 	private String writerName;
 	private boolean actorCanChangeData;
 	private int goodReactionPoint;

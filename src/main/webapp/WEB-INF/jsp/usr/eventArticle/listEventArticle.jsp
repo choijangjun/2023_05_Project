@@ -34,56 +34,15 @@
 										</c:if>
 									</button>
 								</c:if>
-								
-<%-- 								<button class="list-save-button" id="save-btn${eventArticle.id}"> --%>
-<%-- 									<i id="saved-icon${eventArticle.id}" class="list-save-icon fa-regular fa-star" ></i> --%>
-<!-- 								</button> -->
 							</div>
 							<div class="main-span">
 								<span>[${eventArticle.name }]</span>				
 								<br />
 								<span>조건 : ${eventArticle.needs } , 가격 : ${eventArticle.price }원</span>				
 								<br />
-								<span>${eventArticle.period }</span>
+								<span>${eventArticle.startDate.substring(2,16) } ~ ${eventArticle.endDate.substring(2,16) }</span>
 							</div>
 						</div>
-						<script>
-// 							var save = ${eventArticle.save};
-// 							$('#save-btn${eventArticle.id}').click(function(){
-								
-// 								if(save != 1){
-// 									$.ajax({
-// 										type: "get"
-// 										, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
-// 										, dataType : "text"
-// 										, success: function(data) {
-// 		 									let saveIcon = $('#non-saved-icon${eventArticle.id}');
-// 		 									saveIcon.removeClass("fa-regular");
-// 		 									saveIcon.addClass("fa-solid");
-// 		 									saveIcon.attr('id', 'saved-icon${eventArticle.id}');
-		 									
-// 										}
-// 									});
-// 									save = 1;
-// 								} else if(save == 1){
-// 									$.ajax({
-// 										type: "get"
-// 										, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
-// 										, dataType : "text"
-// 										, success: function(data) {
-// 											console.log(data);
-// 		 									let saveIcon = $('#saved-icon${eventArticle.id}');
-// 		 									saveIcon.removeClass("fa-solid");
-// 		 									saveIcon.addClass("fa-regular");
-// 		 									saveIcon.attr('id', 'non-saved-icon${eventArticle.id}');
-// 										}
-										
-// 									});
-// 									save = 0;
-// 								}
-// 							});
-							
-						</script>
 				</c:forEach>
 			</div>
 		</div>
@@ -130,42 +89,4 @@
 			});
 		});
 	</c:forEach>
-</script>
-<script>
-// 	<c:forEach items="${eventArticles}" var="eventArticle">
-// 		var save = ${eventArticle.save};
-// 		$('#save-btn${eventArticle.id}').click(function(){
-			
-// 			if(save != 1){
-// 				$.ajax({
-// 					type: "get"
-// 					, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
-// 					, dataType : "text"
-// 					, success: function(data) {
-// 							let saveIcon = $('#non-saved-icon${eventArticle.id}');
-// 							saveIcon.removeClass("fa-regular");
-// 							saveIcon.addClass("fa-solid");
-// 							saveIcon.attr('id', 'saved-icon${eventArticle.id}');
-							
-// 					}
-// 				});
-// 				save = 1;
-// 			} else if(save == 1){
-// 				$.ajax({
-// 					type: "get"
-// 					, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
-// 					, dataType : "text"
-// 					, success: function(data) {
-// 						console.log(data);
-// 							let saveIcon = $('#saved-icon${eventArticle.id}');
-// 							saveIcon.removeClass("fa-solid");
-// 							saveIcon.addClass("fa-regular");
-// 							saveIcon.attr('id', 'non-saved-icon${eventArticle.id}');
-// 					}
-					
-// 				});
-// 				save = 0;
-// 			}
-// 		});
-// 	</c:forEach>
 </script>
