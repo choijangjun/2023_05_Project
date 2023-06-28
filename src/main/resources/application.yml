@@ -1,6 +1,10 @@
 server:
   port: 8082
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
   mvc:
     view:
       prefix: /WEB-INF/jsp/
@@ -12,3 +16,5 @@ spring:
     password:
 mybatis:
   type-aliases-package: com.koreaIT.demo.vo
+file:
+  dir: C:/cjj/upload

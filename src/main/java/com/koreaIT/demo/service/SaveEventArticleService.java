@@ -33,40 +33,18 @@ public class SaveEventArticleService {
 		
 	}
 
-	public List<EventArticle> getSaveEventArticles(int loginedMemberId, String searchKeyword, int itemsInAPage, int page) {
+	public List<EventArticle> getSaveEventArticles(int loginedMemberId, String searchKeyword, int page, int progress) {
 		
-		int limitStart = (page - 1) * itemsInAPage;
+//		int limitStart = (page - 1) * itemsInAPage;
 		
-		return saveEventArticleRepository.getSaveEventArticles(loginedMemberId, searchKeyword, limitStart, itemsInAPage);
+		return saveEventArticleRepository.getSaveEventArticles(loginedMemberId, searchKeyword, progress);
 	}
 
-	public List<EventArticle> getProgressSaveEventArticles(int loginedMemberId, String searchKeyword, int itemsInAPage,
-			int page) {
-		
-		int limitStart = (page - 1) * itemsInAPage;
-		
-		return saveEventArticleRepository.getProgressSaveEventArticles(loginedMemberId, searchKeyword, limitStart, itemsInAPage);
-	}
 	
-	public List<EventArticle> getEndSaveEventArticles(int loginedMemberId, String searchKeyword, int itemsInAPage,
-			int page) {
-		
-		int limitStart = (page - 1) * itemsInAPage;
-		
-		return saveEventArticleRepository.getEndSaveEventArticles(loginedMemberId, searchKeyword, limitStart, itemsInAPage);
-	}
-	
-	public int getSaveEventArticleCnt(int loginedMemberId, String searchKeyword) {
-		return saveEventArticleRepository.getSaveEventArticleCnt(loginedMemberId, searchKeyword);
+	public int getSaveEventArticleCnt(int loginedMemberId, String searchKeyword, int progress) {
+		return saveEventArticleRepository.getSaveEventArticleCnt(loginedMemberId, searchKeyword, progress);
 	}
 
-	public int getProgressSaveEventArticleCnt(int loginedMemberId, String searchKeyword) {
-		return saveEventArticleRepository.getProgressSaveEventArticleCnt(loginedMemberId, searchKeyword);
-	}
-
-	public int getEndSaveEventArticleCnt(int loginedMemberId, String searchKeyword) {
-		return saveEventArticleRepository.getEndSaveEventArticleCnt(loginedMemberId, searchKeyword);
-	}
 
 	
 }

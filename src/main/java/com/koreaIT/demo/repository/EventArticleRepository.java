@@ -16,4 +16,9 @@ public interface EventArticleRepository {
 
 	void updateEventArticlePG();
 
+	void writeEventArticle(int loginedMemberId, String startDate, String endDate, String winningDate, String name, String title,
+			String section, String goods, String needs, int price, String image, String site);
+
+	void doInsertKategorie(List<String> kategorie, int loginedMemberId);
+
 }

@@ -11,9 +11,13 @@ public class EventArticle {
 	private int id;
 	private String regDate;
 	private String updateDate;
+	private String startDate;
+	private String endDate;
+	private String winningDate;
 	private int memberId;
 	private String name;
-	private String section;
+	private String title;
+	private String kategorie;
 	private String goods;
 	private String needs;
 	private int price;
@@ -22,8 +26,6 @@ public class EventArticle {
 	private String site;
 	private int hitCount;
 	private int save;
-	private String startDate;
-	private String endDate;
 	private int progress;
 	private String writerName;
 	private boolean actorCanChangeData;

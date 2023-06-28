@@ -20,17 +20,25 @@ CREATE TABLE event_Article(
     id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME NOT NULL,
     updateDate DATETIME NOT NULL,
+    startDate DATETIME NOT NULL COMMENT '이벤트 시작일 ', 
+    endDate DATETIME NOT NULL COMMENT '이벤트 종료일',
+    winningDate DATETIME NOT NULL,
     memberId INT UNSIGNED NOT NULL ,
+    `name` VARCHAR(50) NOT NULL,
+    `title` VARCHAR(50) NOT NULL,
     section VARCHAR(50) NOT NULL COMMENT 'movie(영화), food(음식), dessert(디저트), fashion(패션), phoneplan(요금제)',
     goods VARCHAR(50) NOT NULL COMMENT '상품',
     needs VARCHAR(50) NOT NULL COMMENT '참여조건',
     price INT DEFAULT 0 COMMENT '가격',
-    `period` VARCHAR(100) NOT NULL COMMENT '이벤트 기간',
     image VARCHAR(100) NOT NULL COMMENT '이미지 경로',
-    site VARCHAR(100) NOT NULL COMMENT '사이트 경로'
+    site VARCHAR(100) NOT NULL COMMENT '사이트 경로',
+    hitCount INT UNSIGNED NOT NULL DEFAULT 0
 );
-ALTER TABLE event_Article ADD COLUMN hitCount INT UNSIGNED NOT NULL DEFAULT 0;
-ALTER TABLE event_Article ADD COLUMN `name` VARCHAR(50) NOT NULL AFTER memberId;
+ALTER TABLE event_Article MODIFY COLUMN image VARCHAR(40000) NOT NULL;
+
+
+
+
 
 SELECT COUNT(*) FROM event_Article;
 
@@ -97,17 +105,29 @@ CREATE TABLE reply(
     relId INT UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
 	`body` TEXT NOT NULL
 );
+
+CREATE TABLE `file`(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+    originName VARCHAR(50) NOT NULL,
+    savedName VARCHAR(100) NOT NULL,
+    savedPath VARCHAR(100) NOT NULL
+);
+
 # event_Article 테스트 데이터
 INSERT INTO event_Article
 SET regDate = NOW(),
 updateDate = NOW(),
+startDate = '2023-05-24',
+endDate = '2023-05-26',
+winningDate = '2023-06-23',
 memberId = 2,
 `name` = '메가박스',
+title = '사슴의 왕 빵원티켓 선착순 이벤트!!',
 section = 'movie',
 goods = '티켓',
 needs = '선착순',
 price = 0,
-`period` = '23_05_24 ~ 23_05_26',
 image = 'https://img.megabox.co.kr/SharedImg/event/2023/05/19/ANxPzcWa88MtC7SPkVZ5BoGBoupqXW8N.jpg',
 site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
 
@@ -115,13 +135,16 @@ site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
 INSERT INTO event_Article
 SET regDate = NOW(),
 updateDate = NOW(),
+startDate = '2023-05-22',
+endDate = '2023-06-26',
+winningDate = '2023-06-27',
 memberId = 1,
 `name` = '무신사스토어',
+title = '무신사 원클릭 응모 이벤트~!!',
 section = 'fashion',
 goods = '신발',
 needs = '응모',
 price = 1000,
-`period` = '23_05_22 ~ 23_05_27',
 image = 'https://image.msscdn.net/contents/images/raffles/2023/4c5e95c84b16418fa16c0a0c055d49bf.png',
 site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
 
@@ -129,43 +152,19 @@ site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
 INSERT INTO event_Article
 SET regDate = NOW(),
 updateDate = NOW(),
+startDate = '2023-05-22',
+endDate = '2023-06-26',
+winningDate = '2023-06-28',
 memberId = 2,
 `name` = '베스킨라빈스',
+title = '베스킨 아이스크림 무료 나눔 이벤트^^',
 section = 'dessert',
 goods = '아이스크림',
 needs = '인스타',
 price = 0,
-`period` = '23_05_21 ~ 23_06_26',
 image = 'https://www.baskinrobbins.co.kr/upload/event/image/1743759721.jpg',
 site = 'https://www.baskinrobbins.co.kr/event/list.php';
 
-# event_Article 테스트 데이터
-INSERT INTO event_Article
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-`name` = '메가박스',
-section = 'movie',
-goods = '티켓',
-needs = '선착순',
-price = 0,
-`period` = '23_05_24 ~ 23_05_26',
-image = 'https://img.lotteeatz.com/upload/event/THUMBNAIL/2023/04/28/20230428162310267_4.jpg/dims/resize/x200/optimize',
-site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
-
-# event_Article 테스트 데이터
-INSERT INTO event_Article
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-`name` = '메가박스',
-section = 'movie',
-goods = '티켓',
-needs = '선착순',
-price = 0,
-`period` = '23_05_24 ~ 23_05_26',
-image = 'https://img.lotteeatz.com/upload/event/THUMBNAIL/2023/04/28/20230428162310267_4.jpg/dims/resize/x200/optimize',
-site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
 
 # event_Article 데이터 조회
 SELECT * FROM event_Article;
@@ -347,6 +346,10 @@ DESC saveEventArticle;
 
 TRUNCATE saveEventArticle;
 
+TRUNCATE event_Article;
+
+TRUNCATE event_Kategorie;
+
 SELECT * FROM saveEventArticle;
 
 SELECT EA.*
@@ -354,7 +357,98 @@ SELECT EA.*
 			FROM event_Article AS EA
 			LEFT JOIN (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2) AS SEA
 			ON EA.id = SEA.relId
-			WHERE 1 = 1
+			WHERE SEA.save = 1
+			AND EA.progress = 0
 			ORDER BY EA.id;
 			
 (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2);
+
+CREATE TABLE event_Kategorie(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	kategorie VARCHAR(100) NOT NULL,
+	relId INT UNSIGNED NOT NULL
+);
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '영화',
+relId = 1;
+
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '여가',
+relId = 1;
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '패션',
+relId = 2;
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relId = 3;
+SELECT * FROM event_Kategorie;
+
+SELECT * FROM event_Article;
+
+SELECT EA.* , GROUP_CONCAT(EK.kategorie SEPARATOR ',') kategorie
+FROM event_Article EA
+LEFT JOIN event_Kategorie EK
+ON EK.relId = EA.id
+GROUP BY EA.id;
+
+SELECT * FROM event_Kategorie 
+
+WITH EA_SAE AS (
+   SELECT EA.* 
+            , IFNULL(SEA.save, 0) AS save
+        FROM event_Article AS EA
+        LEFT JOIN (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2) AS SEA
+        ON EA.id = SEA.relId
+        WHERE 1 = 1
+
+) SELECT EA_SAE.* ,GROUP_CONCAT(EK.kategorie SEPARATOR ',') kategorie
+FROM EA_SAE
+LEFT JOIN event_Kategorie EK
+ON EK.relId = EA_SAE.id
+WHERE 1 =1 
+AND EK.kategorie IN ('영화','여가','패션','디저트')
+GROUP BY EK.relId
+ORDER BY EA_SAE.id DESC
+
+SELECT *
+    , GROUP_CONCAT(EK.kategorie SEPARATOR ',') kategorie 
+FROM event_Kategorie EK
+GROUP BY EK.relId
+
+SELECT * FROM event_Article;
+
+WITH EA_SEA AS(
+			SELECT EA.* 
+					, IFNULL(SEA.save, 0) AS save
+				FROM event_Article AS EA
+				LEFT JOIN (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2) AS SEA
+				ON EA.id = SEA.relId
+				WHERE 1 = 1
+				ORDER BY EA.id DESC)
+			SELECT EA_SEA.*
+			FROM EA_SEA
+			
+			
+			LEFT JOIN event_Kategorie EK
+			ON EK.relId = EA_SEA.id
+			WHERE 1 = 1
+			
+
+				
+				
+			GROUP BY EK.relId
+			ORDER BY EA_SEA.id DESC

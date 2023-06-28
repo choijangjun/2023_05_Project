@@ -37,5 +37,16 @@ public class EventArticleService {
 		eventArticleRepository.updateEventArticlePG();
 	}
 
+	public void writeEventArticle(int loginedMemberId, String startDate, String endDate, String winningDate, String name, String title,
+			String section, String goods, String needs, int price, String image, String site) {
+		eventArticleRepository.writeEventArticle(loginedMemberId, startDate, endDate, winningDate, name,  title, 
+				section, goods, needs, price, image, site);
+	}
+
+	public void doInsertKategorie(List<String> kategorie, int loginedMemberId) {
+		eventArticleRepository.doInsertKategorie(kategorie, loginedMemberId);
+		
+	}
+
 	
 }

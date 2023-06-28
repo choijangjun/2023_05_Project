@@ -15,9 +15,16 @@
 			<div class="ml-6">실시간 가장 핫한 이벤트</div>
 			<div class="text-center">
 				<c:forEach var="eventArticle" items="${eventArticles }">
-						<div class="inline-block m-2">
+						<div class="main-img inline-block m-2">
 							<div class="main-img-div">
-								<a class="main-img-a" target="_blank" href="${eventArticle.site }"><img class="main-img" src="${eventArticle.image }" alt="" /></a>
+								<a class="main-img-a" target="_blank" href="${eventArticle.site }">
+								<c:if test="${eventArticle.image != ''}">
+									<img class="main-img" src="${eventArticle.image }" />
+								</c:if>
+								<c:if test="${eventArticle.image == ''}">
+									<img class="main-img" src="/usr/eventArticle/file/${eventArticle.id}" />
+								</c:if>
+								</a>
 								
 								<c:if test="${rq.getLoginedMemberId() == 0 }">
 									<button class="list-save-button" onClick="pleaseLogin()">
@@ -36,9 +43,11 @@
 								</c:if>
 							</div>
 							<div class="main-span">
-								<span>[${eventArticle.name }]</span>				
+								<span>${eventArticle.name }</span>				
 								<br />
-								<span>조건 : ${eventArticle.needs } , 가격 : ${eventArticle.price }원</span>				
+								<span>[${eventArticle.title }]</span>		
+								<br />
+								<span>조건 : ${eventArticle.needs }&nbsp;&nbsp;가격 : ${eventArticle.price }원</span>				
 								<br />
 								<span>${eventArticle.startDate.substring(2,16) } ~ ${eventArticle.endDate.substring(2,16) }</span>
 							</div>
@@ -59,7 +68,7 @@
 				save = 1;
 				$.ajax({
 					type: "get"
-					, url: "../saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+					, url: "/usr/saveEventArticle/doInsertSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
 					, dataType : "text"
 					, success: function(data) {
 							let saveIcon = $('#non-saved-icon${eventArticle.id}');
@@ -74,10 +83,9 @@
 				save = 0;
 				$.ajax({
 					type: "get"
-					, url: "../saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
+					, url: "/usr/saveEventArticle/doDeleteSaveEventArticle?relId=${eventArticle.id}&relTypeCode=eventArticle"
 					, dataType : "text"
 					, success: function(data) {
-						console.log(data);
 							let saveIcon = $('#saved-icon${eventArticle.id}');
 							saveIcon.removeClass("fa-solid");
 							saveIcon.addClass("fa-regular");

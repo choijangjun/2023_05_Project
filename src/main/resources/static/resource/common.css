@@ -62,6 +62,9 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 	border-radius: 20px 0 0 20px;
 	border: 1px solid #B7B7B7;
 	background-color: #EBEBEB;
+	font-size: 20px;
+	margin-left: 20px;
+	padding-left: 20px;
 }
 
 .search-input:focus {
@@ -160,11 +163,17 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 .listEventArticle-main {
 	margin-top: 25px;
 }
-.main-img-a {
-	display: inline-block;
+
+.main-img {
+	
 }
+
 .main-img-div{
 	position: relative;
+}
+
+.main-img-a {
+	display: inline-block;
 }
 .main-img {
 	
@@ -211,8 +220,8 @@ div {
 
 .container-box {
 	position: relative;
-	width: 1200px;
-	min-width: 1200px;
+	width: 1400px;
+	min-width: 1400px;
 	margin: 0 auto;
 	
 }
@@ -250,7 +259,7 @@ div {
 	position: relative;
 	border: 1px solid #B7B7B7;
 	padding: 40px;
-	width: 1000px;
+	width: 1200px;
 }
 .myPage-head-div {
 	position: relative;
@@ -396,3 +405,180 @@ body {
 	background-color: #f6f6f6;
 }
 
+/* writeEventArticle CSS처리 */
+/* writeEventArticle CSS처리 */
+/* writeEventArticle CSS처리 */
+.writeEvent-box{
+	border: 1px solid #B7B7B7;
+	padding: 15px 30px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.writeEvent-input{
+	width: 700px;
+	height: 36px;
+	border: 1px solid #B7B7B7;
+	padding-left: 20px;
+	margin: 10px 0;
+	font-size: 14px;
+}
+.Date-div{
+	display: flex;
+	align-items: center;
+}
+
+.writeEvent-Date-div{
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin-right: 10px;
+	
+}
+.writeEvent-endDate{
+	margin-left: 10px;
+}
+.writeEvent-winningDate{
+	margin-left: 100px;
+}
+
+.writeEvent-input-Date {
+	width: 100%;
+	height: 36px;
+	border: 1px solid #B7B7B7;
+	padding-left: 20px;
+	margin: 10px 0;
+	font-size: 14px;
+	border-radius: 5px;
+}
+.calendar-icon{
+	position: absolute;
+	right: 10px;
+}
+.writeEvent-input-Date:focus {
+	outline:1px solid #4948FF;
+}
+.writeEvent-input:focus {
+	outline:1px solid #4948FF;
+}
+.writeEvnet-input-head{
+	font-size: 22px;
+	font-weight: 600;
+	margin-top: 5px;
+	margin-bottom: 12px;
+}
+.writeEvent-btn-div{
+	display: flex;
+	justify-content: right;
+}
+.writeEventArticle-warn{
+	color: rgb(134, 134, 134);
+    font-size: 13px;
+    font-weight: 400;
+}
+.writeEvent-btn{
+	width: 150px;
+	padding: 10px 12px;
+	background-color: #1266FF;
+	color: #fff;
+	font-style: 14px;
+	border-radius: 3px;
+}
+.startDate-span{
+	position: relative;
+	top: 10px;
+	margin: 0px 10px;
+}
+.endDate-span{
+	position: relative;
+	top: 10px;
+	left: 180px;
+}
+
+.winningDate-span{
+	position: relative;
+	top: 10px;
+	left: 450px;
+	margin: 0px 10px;
+}
+.writeEvent-imageUpload{
+	height: 277px;
+	width: 355px;
+	border: 2px dashed #B7B7B7;
+	margin-bottom: 10px;
+	background-color: #F6F6F6;
+	display: flex;
+    font-size: 30px;
+    color: #1266FF;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+   
+}
+ 
+.writeEvent-imageBtn{
+	border: 1px solid #B7B7B7;
+	font-size: 14px;
+	height: 36px;
+	padding: 0px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 200px;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.btn-hover:hover{
+	filter: brightness(90%);
+}
+.writeEvent-imageURL{
+	position: absolute;
+	display: none;
+	border: 1px solid #B7B7B7;
+	background-color: #fff;
+	font-size: 14px;
+	z-index: 1;
+}
+.writeEvent-imageURL-input{
+	width: 100%;
+	border: 1px solid #B7B7B7;
+	height: 32px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 10px 0;
+}
+.writeEvent-imageURL-input:focus {
+	outline:1px solid #4948FF;
+}
+
+.writeEvent-imageURL-Btn{
+	width: 50px;
+	padding: 5px 6px;
+	background-color: #1266FF;
+	color: #fff;
+	font-style: 14px;
+	border-radius: 3px;
+	margin:0 0 0 auto;
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    
+}
+.writeEvent-imageUpload-icon{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.writeEvent-imageUpload-image{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+.writeEvent-imgUpload-input{
+	width: 100%;
+	width: 100%;
+	opacity:0;
+	z-index:5;
+	cursor: pointer;
+}

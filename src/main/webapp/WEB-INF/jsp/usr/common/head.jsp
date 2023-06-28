@@ -22,7 +22,7 @@
 	<header class="head-header text-sm border-bottom-line ">
 		<div class ="flex items-center">
 			<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center mx-3"><img class="object-cover " src="/resource/images/logo.png" /></a>
-			<a class=" hover:underline h-full px-3 flex items-center" href="/usr/eventArticle/share"><span>이벤트 공유</span></a>
+			<a class=" hover:underline h-full px-3 flex items-center" href="/usr/eventArticle/writeEventArticle"><span>이벤트 공유</span></a>
 			<a class="hover:underline h-full px-3 flex items-center" href="/usr/member/login"><span>쇼핑</span></a>
 			<a class="hover:underline h-full px-3 flex items-center" href="/usr/article/list?boardId=1"><span>공지사항</span></a>
 			<a class="hover:underline h-full px-3 flex items-center" href="/usr/article/list?boardId=2"><span>자유게시판</span></a>
