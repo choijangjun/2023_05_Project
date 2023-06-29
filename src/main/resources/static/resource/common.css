@@ -317,25 +317,77 @@ div {
 	padding: 5px 0px;
 	background-color: #EAEAEA;
 }
-.myEventArticle-table-div td {
+.saveEvent-Tbody-body td {
 	text-align: center;
 	border: 1px solid #F3F3F3;
-	padding: 21px 0px;
+	border-right: none;
 	
 }
 
+.saveEvent-Tbody-body td:first-child{
+	width: 100px;
+	border-left: none;
+}
+.saveEvent-Tbody-table{
+	width: 100%;
+	height: 100%;
+}
+
+.saveEvent-Tbody{
+	border: 1px solid #F3F3F3;
+	margin: 20px 0;
+	border-radius: 5px;
+	box-shadow:2px 2px 5px 2px  #F3F3F3;
+}
+.myEventArticle-images{
+	width: 180px;
+	height: 180px;
+}
+.saveEvent-Tbody-div{
+	margin: 30px;
+}
+
+.saveEvent-Tbody-date{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.saveEvent-Tbody-images-div{
+	display: flex;
+/* 	justify-content: center; */
+}
+.saveEvent-Tbody-progress{
+	color: #FFF;
+	font-weight: normal;
+	font-size: 16px;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+.saveEvent-Tbody-body{
+	font-size: 16px;
+	margin-left: 30px;
+	width: 500px;
+	height: 150px;
+}
+.saveEvent-Tbody-title{
+	font-weight: bold;
+}
 #saveEventCheckBox {
 	width:16px;
 	height:16px;
 	position: relative;
     top: 3px;
 }
+
 #saveEventCheckBoxCol{
 	width:16px;
 	height:16px;
 	position: relative;
     top: 3px;
 }
+
 .myEventArticle-article-head{
 	display: flex;	
 	justify-content: space-between;

@@ -136,7 +136,11 @@
 								<input class="writeEvent-input" type="text" name="goods" placeholder="상품을 입력하세요."/>
 							</div>
 							<div class="writeEvnet-input-head">
-								<h3>조건</h3>
+								<h3>참여 방법</h3>
+							</div>
+							<div>
+								<span>간략하게 적어주세요.</span>
+								<p class="writeEventArticle-warn">ex) 제품 사진을 포함한 인스타 게재, 선착순</p>
 							</div>
 							<div>
 								<input class="writeEvent-input" type="text" name="needs" placeholder="조건을 입력하세요."/>
@@ -313,8 +317,8 @@ $(function(){
 		timePicker: true,
 		locale: {
 		      format: 'YYYY-MM-DD HH:mm',
-		    	  "applyLabel": "확인",                    // 확인 버튼 텍스트
-		    	    "cancelLabel": "취소",                   // 취소 버튼 텍스트
+		    	  "applyLabel": "확인",                   
+		    	    "cancelLabel": "취소",                   
 		    	    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
 		    	    "monthNames": ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
 		    }

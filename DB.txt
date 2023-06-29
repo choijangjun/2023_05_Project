@@ -113,7 +113,14 @@ CREATE TABLE `file`(
     savedName VARCHAR(100) NOT NULL,
     savedPath VARCHAR(100) NOT NULL
 );
-
+CREATE TABLE event_Kategorie(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	kategorie VARCHAR(100) NOT NULL,
+	relId INT UNSIGNED NOT NULL
+);
+SELECT * FROM `file`;
 # event_Article 테스트 데이터
 INSERT INTO event_Article
 SET regDate = NOW(),
@@ -363,13 +370,6 @@ SELECT EA.*
 			
 (SELECT * FROM saveEventArticle SEA WHERE SEA.memberId = 2);
 
-CREATE TABLE event_Kategorie(
-    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-	updateDate DATETIME NOT NULL,
-	kategorie VARCHAR(100) NOT NULL,
-	relId INT UNSIGNED NOT NULL
-);
 
 INSERT INTO event_Kategorie
 SET regDate = NOW(),
@@ -452,3 +452,12 @@ WITH EA_SEA AS(
 				
 			GROUP BY EK.relId
 			ORDER BY EA_SEA.id DESC
+			
+			SELECT * FROM event_Article ORDER BY id DESC; 
+			SELECT * FROM saveEventArticle;
+			
+			SELECT * FROM `file`ORDER BY id DESC; 
+			
+			DELETE FROM `file`
+				WHERE relTypeCode = 'eventArticle'
+				AND relId = (SELECT MAX(EA.id) FROM event_Article EA WHERE EA.memberId = 2) + 1

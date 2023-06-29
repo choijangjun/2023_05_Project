@@ -47,7 +47,7 @@
 								<br />
 								<span>[${eventArticle.title }]</span>		
 								<br />
-								<span>조건 : ${eventArticle.needs }&nbsp;&nbsp;가격 : ${eventArticle.price }원</span>				
+								<span>조건 : ${eventArticle.needs }&nbsp;&nbsp;가격 : ${eventArticle.price } 원</span>				
 								<br />
 								<span>${eventArticle.startDate.substring(2,16) } ~ ${eventArticle.endDate.substring(2,16) }</span>
 							</div>
