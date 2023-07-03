@@ -33,9 +33,7 @@ public class SaveEventArticleService {
 		
 	}
 
-	public List<EventArticle> getSaveEventArticles(int loginedMemberId, String searchKeyword, int page, int progress) {
-		
-//		int limitStart = (page - 1) * itemsInAPage;
+	public List<EventArticle> getSaveEventArticles(int loginedMemberId, String searchKeyword, int progress) {
 		
 		return saveEventArticleRepository.getSaveEventArticles(loginedMemberId, searchKeyword, progress);
 	}

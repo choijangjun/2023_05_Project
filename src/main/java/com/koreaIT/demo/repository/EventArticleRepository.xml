@@ -8,6 +8,15 @@
 			SET progress = IF( startDate &lt;= NOW() AND endDate > NOW() , 1, 0)
 	</update>
 	
+	<select id="getEventArticle" resultType="EventArticle">
+		SELECT EA.* , GROUP_CONCAT(EK.kategorie SEPARATOR ',') kategorie
+			FROM event_Article EA
+			LEFT JOIN event_Kategorie EK
+			ON EK.relId = EA.id
+			WHERE EA.id = #{id}
+			
+	</select>
+	
 	<insert id="writeEventArticle">
 		INSERT INTO event_Article
 			SET regDate = NOW(),
@@ -22,14 +31,51 @@
 				needs = #{needs},
 				price = #{price},
 				image = #{image},
-				site = #{site}
+				site = #{site},
+				progress = IF( startDate &lt;= NOW() AND endDate > NOW() , 1, 0)
 	</insert>
+	
 	<insert id="doInsertKategorie" parameterType="java.util.List" >
 			INSERT INTO event_Kategorie(regDate, updateDate, kategorie, relTypeCode, relId) VALUES 
 			<foreach collection="param1" index="index" item="kategorie" separator=" , ">
 				(NOW(), NOW(), '${kategorie}', 'eventArticle', (SELECT MAX(EA.id) FROM event_Article EA WHERE EA.memberId = #{loginedMemberId}))
 			</foreach>
 	</insert>
+
+	<update id="doModifyEventArticle">
+		UPDATE event_Article
+			SET updateDate = NOW(),
+				startDate = #{startDate},
+				endDate = #{endDate},
+				winningDate = #{winningDate},
+				`name` = #{name},
+				title = #{title},
+				goods = #{goods},
+				needs = #{needs},
+				price = #{price},
+				image = #{image},
+				site = #{site},
+				progress = IF( startDate &lt;= NOW() AND endDate > NOW() , 1, 0)
+			WHERE id = #{id}
+	</update>
+	
+	
+	<insert id="doModifyKategorie" parameterType="java.util.List" >
+			INSERT INTO event_Kategorie(regDate, updateDate, kategorie, relTypeCode, relId) VALUES 
+			<foreach collection="param1" index="index" item="kategorie" separator=" , ">
+				(NOW(), NOW(), '${kategorie}', 'eventArticle', #{id})
+			</foreach>
+	</insert>
+	
+	<delete id="doDeleteEventArticle">
+		DELETE FROM event_Article
+			WHERE id = #{id}
+	</delete>
+	
+	<delete id="doDeleteEventKategorie">
+		DELETE FROM event_Kategorie
+			WHERE relId = #{id}
+	</delete>
 	
 	<update id="increaseHitCount">
 		UPDATE article
@@ -74,13 +120,14 @@
 			LEFT JOIN event_Kategorie EK
 			ON EK.relId = EA_SEA.id
 			WHERE 1 = 1
+			
 			<if test="param1 != null">
 				AND EK.kategorie IN 
 				<foreach collection="param1" index="index" item="kategorie" open="(" close=")" separator=",">
 	 				'${kategorie}'
 				</foreach>
 			</if>
-			GROUP BY EK.relId
+			GROUP BY EA_SEA.id
 			ORDER BY EA_SEA.id DESC
 	</select>
 	
@@ -126,5 +173,46 @@
 			
 	</select>
 	
+	<select id="getMyWriteEventArticles" resultType="EventArticle">
+		SELECT *
+		    FROM event_Article EA
+		    WHERE EA.memberId= #{loginedMemberId}
+		    <if test="progress == 1">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="progress == 0">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY EA.updateDate DESC
+	</select>
+	
+	<select id="getMyWriteEventArticleCnt" resultType="int">
+		SELECT COUNT(*)
+		    FROM event_Article EA
+		    WHERE EA.memberId= #{loginedMemberId}
+		    <if test="progress == 1">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="progress == 0">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY EA.updateDate DESC
+	</select>
 	
 </mapper>

@@ -9,21 +9,21 @@
 			<section class="myPage-center-section">
 				<div class="myPage-center-div">
 					<div class ="myPage-head-div">
-						<h2 class ="myPage-head-h2">저장한 이벤트</h2>
+						<h2 class ="myPage-head-h2">즐겨찾기</h2>
 					</div>
 					<div id="myPage-eventArticle" class="myPage-eventArticle">
 						<div class="myPage-eventArticle-div">
 							<ul>
-								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myEventArticle"><button id="savedEventArticle" class="myPage-eventArticle-button" name=progress value="2">전체 이벤트</button></form></li>
-								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myEventArticle"><button id="goSavedEventArticle" class="myPage-eventArticle-button" name=progress value="1">진행중인 이벤트</button></form></li>
-								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myEventArticle"><button id="endSavedEventArticle" class="myPage-eventArticle-button" name=progress value="0">종료된 이벤트</button></form></li>
+								<li class="myPage-eventArticle-li"><form action="/usr/myPage/mySaveEventArticle"><button id="savedEventArticle" class="myPage-eventArticle-button" name=progress value="2">전체 이벤트</button></form></li>
+								<li class="myPage-eventArticle-li"><form action="/usr/myPage/mySaveEventArticle"><button id="goSavedEventArticle" class="myPage-eventArticle-button" name=progress value="1">진행중인 이벤트</button></form></li>
+								<li class="myPage-eventArticle-li"><form action="/usr/myPage/mySaveEventArticle"><button id="endSavedEventArticle" class="myPage-eventArticle-button" name=progress value="0">종료된 이벤트</button></form></li>
 							</ul>
 						</div>
 					</div>
 					<article id="myEventArticle-article" class="myEventArticle-article">
 						<div class="myEventArticle-article-head">
 							<div class="myEventArticle-search-input-div">
-								<form class="flex"action="/usr/myPage/myEventArticle">
+								<form class="flex"action="/usr/myPage/mySaveEventArticle">
 									<input class="myEventArticle-search-input" name="searchKeyword" placeholder="기업명, 조건, 상품 등 검색" maxlength="20" value="${searchKeyword}" />
 									<button class="myEventArticle-search-button" name="progress" value="${progress}"><i class="text-xl fa-solid fa-magnifying-glass"></i></button>
 								</form>
@@ -59,10 +59,10 @@
 												<div class="saveEvent-Tbody-images-div">
 													<div>
 														<a href="${saveEventArticle.site}">
-															<c:if test="${saveEventArticle.image != ''}">
+															<c:if test="${saveEventArticle.image != '0'}">
 																<img class="myEventArticle-images" src="${saveEventArticle.image}" alt="" />
 															</c:if>
-															<c:if test="${saveEventArticle.image == ''}">
+															<c:if test="${saveEventArticle.image == '0'}">
 																<img class="myEventArticle-images" src="/usr/eventArticle/file/${saveEventArticle.id}" alt="" />
 															</c:if>
 														</a>
@@ -95,21 +95,26 @@
 							</div>
 						</div>
 						<div class="myEventArticle-article-foot">
+							<div>
+								<form action="/usr/eventArticle/writeEventArticle">
+									<button class="myEventArticle-write-button btn-hover">등록하기</button>
+								</form>
+							</div>
 							<div class="page-click-div">
-								<c:set var="endPage" value="${startPage + 9 <= pagesCount ? startPage + 9 : pagesCount }"/>
+								<c:set var="endPage" value="${startPage + 4 <= pagesCount ? startPage + 4 : pagesCount }"/>
 								<c:set var="pageBaseUri" value="?searchKeyword=${searchKeyword }"/>
 								<c:if test="${startPage != 1}">
-									<a class=" page-click" href="${pageBaseUri }&page=${startPage - 10}"><i class="page-click-span fa-solid fa-chevron-right fa-flip-horizontal"></i></a>
+									<a class=" page-click" href="${pageBaseUri }&page=${startPage - 5}"><i class="page-click-span fa-solid fa-chevron-right fa-flip-horizontal"></i></a>
 								</c:if>
 								<c:forEach begin="${startPage }" end="${endPage }" var="i">
 									<a id="page-click${i}" class="page-click" href="${pageBaseUri }&page=${i }&progress=${progress }"><span class="page-click-span">${i }</span></a>
 								</c:forEach>
-								<c:if test="${startPage + 9 < pagesCount}">
-									<a class=" page-click" href="${pageBaseUri }&page=${startPage + 10}"><i class=" page-click-span fa-solid fa-chevron-right"></i></a>
+								<c:if test="${startPage + 4 < pagesCount}">
+									<a class=" page-click" href="${pageBaseUri }&page=${startPage + 5}"><i class=" page-click-span fa-solid fa-chevron-right"></i></a>
 								</c:if>
 							</div>
 							<div class="myEventArticle-delete-div">
-								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button btn-hover">삭제</button>
 							</div>
 						</div>
 					</article>
@@ -216,8 +221,8 @@
 
 <script>
  $(function(){
-	 $("#myPage-left-myEventArticle").css({
-		 "color": "#489CFF"
+	 $("#myPage-left-mySaveEventArticle").css({
+		 "color": "#1266FF"
 	 });
  });
 </script>

@@ -29,25 +29,20 @@
 							<div id="layer-section-in" class="layer-section-in ">
 								<h1>분야</h1>
 								<p>중복선택이 가능합니다.</p>
-								<form id="kategorie-form" action="/usr/eventArticle/listEventArticle" method="get">
 									<div>
 										<label class="section-label" for="movie">
-											<input id="movie" type="checkbox" name="checkKeyword" value="영화"  onclick="#search-btn" />
+											<input id="Smovie" type="checkbox" name="checkKeyword" value="영화"  />
 											<span>영화</span>
 										</label>
 										<label class="section-label" for="fashion">
-											<input id="fashion" type="checkbox"  name="checkKeyword" value="패션" />
+											<input id="Sfashion" type="checkbox"  name="checkKeyword" value="패션" />
 											<span>패션</span>
 										</label>
 										<label class="section-label" for="dessert">
-											<input id="dessert" type="checkbox" name="checkKeyword" value="디저트"/>
+											<input id="Sdessert" type="checkbox" name="checkKeyword" value="디저트"/>
 											<span>디저트</span>
 										</label>
-										<div class="section-button">
-											<button id="search-btn" class="btn-text-link btn btn-active" >적용</button>
-										</div>
 									</div>
-								</form>
 							</div>
 						</div>
 					</div>
@@ -55,6 +50,35 @@
 			</div>  
 		</div>
 	</section>
+<script>
+	$(function(){
+		$('input:checkbox[name=checkKeyword]').change(function(){
+			var inputSearchKeyword = $("input[name='searchKeyword']").val();
+			var inputCheckKeyword = new Array();
+			
+		    $('input:checkbox[name=checkKeyword]:checked').each(function() {
+		    	inputCheckKeyword.push(this.value);
+		    });
+		    if(inputCheckKeyword == ''){
+		    	location.replace("/usr/eventArticle/listEventArticle");
+		    	return;
+		    }
+		    
+		    location.replace("/usr/eventArticle/listEventArticle?checkKeyword=" + inputCheckKeyword +
+					"&searchKeyword=" + inputSearchKeyword);
+// 			 $.ajax({
+// 					type: "get"
+// 					, url: "/usr/eventArticle/listEventArticle?checkKeyword=" + inputCheckKeyword +
+// 							"&searchKeyword=" + inputSearchKeyword
+// 					, dataType : "text"
+// 					, success: function(data) {
+// 						alert(inputCheckKeyword);
+						
+// 					}
+// 				});
+		});
+	});
+</script>
 <script>
 	$(function(){
 		var layerSection = $("#layer-section");
@@ -76,8 +100,8 @@
 			if(layerSection.css('display') == 'none'){
 				layerSection.show();
 				buttonSection.css({
-					"color": "#489CFF",
-					"border": "1px solid #489CFF"
+					"color": "#1266FF",
+					"border": "1px solid #1266FF"
 				});
 				arrow.addClass("fa-flip-vertical");
 			
@@ -89,11 +113,11 @@
 <script>
 	<c:forEach items="${checkKeyword}" var="kategorie" varStatus="status">
 		if('${kategorie}' == '영화') {
-			$('#movie').prop('checked',true);
+			$('#Smovie').prop('checked',true);
 		} else if('${kategorie}' == '패션') {
-			$('#fashion').prop('checked',true);
+			$('#Sfashion').prop('checked',true);
 		} else if('${kategorie}' == '디저트') {
-			$('#dessert').prop('checked',true);
+			$('#Sdessert').prop('checked',true);
 		}
 	</c:forEach>
 </script>

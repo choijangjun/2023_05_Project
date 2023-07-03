@@ -263,7 +263,7 @@ div {
 }
 .myPage-head-div {
 	position: relative;
-	padding: 20px 0;
+	margin: 10px 0 40px 0;
 	font-size: 38px;
 }
 .myEventArticle-table {
@@ -413,10 +413,13 @@ div {
 	align-items: center;
 }
 
-.myEventArticle-delete-div{
-	margin: auto 0 auto auto;
-}
 
+.myEventArticle-write-button{
+	padding: 7px 15px;
+	margin: 15px 10px;
+	border: 1px solid #D8D8D8;
+	background-color: #EAEAEA;
+}
 .myEventArticle-delete-button{
 	padding: 7px 15px;
 	margin: 15px 10px;
@@ -426,9 +429,7 @@ div {
 .myEventArticle-article-foot{
 	display: flex;
     align-items: center;
-}
-.page-click-div{
-	margin-left: 270px; 
+    justify-content: space-between;
 }
 .page-click{
 	display: inline-block;
@@ -516,8 +517,8 @@ body {
 .writeEvnet-input-head{
 	font-size: 22px;
 	font-weight: 600;
-	margin-top: 5px;
-	margin-bottom: 12px;
+	margin-top: 10px;
+	margin-bottom: 9px;
 }
 .writeEvent-btn-div{
 	display: flex;
@@ -535,6 +536,10 @@ body {
 	color: #fff;
 	font-style: 14px;
 	border-radius: 3px;
+}
+.search-button-title:hover{
+	border: 1px solid #1266FF;
+	color: #1266FF;
 }
 .startDate-span{
 	position: relative;
@@ -554,9 +559,9 @@ body {
 	margin: 0px 10px;
 }
 .writeEvent-imageUpload{
-	height: 277px;
-	width: 355px;
-	border: 2px dashed #B7B7B7;
+	height: 180px;
+	width: 180px;
+	border: 1px dashed #B7B7B7;
 	margin-bottom: 10px;
 	background-color: #F6F6F6;
 	display: flex;
@@ -581,7 +586,7 @@ body {
     justify-content: center;
 }
 .btn-hover:hover{
-	filter: brightness(90%);
+	filter: brightness(10%);
 }
 .writeEvent-imageURL{
 	position: absolute;
@@ -629,8 +634,30 @@ body {
 }
 .writeEvent-imgUpload-input{
 	width: 100%;
-	width: 100%;
+	height: 100%;
 	opacity:0;
 	z-index:5;
 	cursor: pointer;
+}
+
+/* myWriteEventArticle CSS  */
+/* myWriteEventArticle CSS  */
+/* myWriteEventArticle CSS  */
+
+.eventAticle-modify-div{
+	margin: auto 50px 0 auto;
+	padding: 20px 0;
+}
+
+.eventAticle-modify-btn{
+	border: 1px solid #1266FF;
+	color: #1266FF;
+	width: 120px;
+	height: 38px;
+	border-radius: 3px;
+}
+
+.eventAticle-modify-btn:hover {
+	background-color: #1266FF;
+	color: #fff;
 }

@@ -18,10 +18,10 @@
 						<div class="main-img inline-block m-2">
 							<div class="main-img-div">
 								<a class="main-img-a" target="_blank" href="${eventArticle.site }">
-								<c:if test="${eventArticle.image != ''}">
+								<c:if test="${eventArticle.image != '0'}">
 									<img class="main-img" src="${eventArticle.image }" />
 								</c:if>
-								<c:if test="${eventArticle.image == ''}">
+								<c:if test="${eventArticle.image == '0'}">
 									<img class="main-img" src="/usr/eventArticle/file/${eventArticle.id}" />
 								</c:if>
 								</a>

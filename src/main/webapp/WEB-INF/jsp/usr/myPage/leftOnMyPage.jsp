@@ -8,9 +8,9 @@
 	<div class ="myPage-left-div">
 		<h2 class ="myPage-left-h2">이벤트 관리</h2>
 		<ul class ="myPage-left-ul">
-			<li id=""><a href="../myPage/myWriteEventArticle">내 이벤트</a></li>
-			<li id="myPage-left-myShareEventArticle"><a href="../eventArticle/writeEventArticle">이벤트 등록</a></li>
-			<li id="myPage-left-myEventArticle"><a href="../myPage/myEventArticle">저장한 이벤트</a></li>
+			<li id="myPage-left-myWriteEventArticle"><a href="../myPage/myWriteEventArticle">내 이벤트</a></li>
+			<li id="myPage-left-writeEventArticle"><a href="../eventArticle/writeEventArticle">이벤트 등록</a></li>
+			<li id="myPage-left-mySaveEventArticle"><a href="../myPage/mySaveEventArticle">즐겨찾기</a></li>
 		</ul>
 	</div>
 	<div class ="myPage-left-div">

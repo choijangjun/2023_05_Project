@@ -1,5 +1,6 @@
 package com.koreaIT.demo.vo;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

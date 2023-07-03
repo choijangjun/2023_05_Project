@@ -34,7 +34,7 @@ public class UsrSaveEventArticleController {
 		return saveEventArticle;
 	}
 	
-	@RequestMapping("/usr/myPage/myEventArticle")
+	@RequestMapping("/usr/myPage/mySaveEventArticle")
 	public String showSaveList(Model model, @RequestParam(defaultValue = "1") int page, 
 			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "2") int progress) {
 		
@@ -43,11 +43,11 @@ public class UsrSaveEventArticleController {
 		
 		int pagesCount = (int) Math.ceil((double) saveEventArticleCnt / itemsInAPage);
 		
-		int pagesInASaveEvent = 10;
+		int pagesInASaveEvent = 5;
 		
 		int startPage = (int) Math.floor((double) page / pagesInASaveEvent) * pagesInASaveEvent + 1;
 		
-		List<EventArticle> saveEventArticles = saveEventArticleService.getSaveEventArticles(rq.getLoginedMemberId(), searchKeyword, page, progress);
+		List<EventArticle> saveEventArticles = saveEventArticleService.getSaveEventArticles(rq.getLoginedMemberId(), searchKeyword, progress);
 		
 		
 		model.addAttribute("progress", progress);
@@ -58,7 +58,7 @@ public class UsrSaveEventArticleController {
 		model.addAttribute("saveEventArticleCnt", saveEventArticleCnt);
 		model.addAttribute("saveEventArticles", saveEventArticles);
 		
-		return "usr/myPage/myEventArticle";
+		return "/usr/myPage/mySaveEventArticle";
 	}
 	
 	@RequestMapping("/usr/saveEventArticle/doInsertSaveEventArticle")

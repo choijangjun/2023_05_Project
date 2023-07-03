@@ -54,7 +54,7 @@
 <script>
  $(function(){
 	 $("#myPage-left-personalData").css({
-		 "color": "#489CFF"
+		 "color": "#1266FF"
 	 });
  });
 </script>
