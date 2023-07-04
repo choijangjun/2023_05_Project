@@ -1,0 +1,413 @@
+ # DB 삭제/생성/사용
+DROP DATABASE IF EXISTS SB_AM;
+CREATE DATABASE SB_AM;
+USE SB_AM;
+
+# article 테이블 생성
+CREATE TABLE article(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	title VARCHAR(100) NOT NULL,
+	`body` TEXT NOT NULL
+);
+
+ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
+ALTER TABLE article ADD COLUMN boardId INT UNSIGNED NOT NULL AFTER memberId;
+ALTER TABLE article ADD COLUMN hitCount INT UNSIGNED NOT NULL DEFAULT 0;
+
+CREATE TABLE event_Article(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    startDate DATETIME NOT NULL COMMENT '이벤트 시작일 ', 
+    endDate DATETIME NOT NULL COMMENT '이벤트 종료일',
+    winningDate DATETIME NOT NULL,
+    memberId INT UNSIGNED NOT NULL ,
+    `name` VARCHAR(50) NOT NULL,
+    `title` VARCHAR(50) NOT NULL,
+    section VARCHAR(50) NOT NULL COMMENT 'movie(영화), food(음식), dessert(디저트), fashion(패션), phoneplan(요금제)',
+    goods VARCHAR(50) NOT NULL COMMENT '상품',
+    needs VARCHAR(50) NOT NULL COMMENT '참여조건',
+    price INT DEFAULT 0 COMMENT '가격',
+    image VARCHAR(100) NOT NULL COMMENT '이미지 경로',
+    site VARCHAR(100) NOT NULL COMMENT '사이트 경로',
+    hitCount INT UNSIGNED NOT NULL DEFAULT 0
+);
+ALTER TABLE event_Article MODIFY COLUMN image VARCHAR(40000) NOT NULL;
+
+
+
+
+
+SELECT COUNT(*) FROM event_Article;
+
+DESC article;
+DESC event_Article;
+
+# member 테이블 생성
+CREATE TABLE `member`(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	loginId VARCHAR(20) NOT NULL UNIQUE,
+	loginPw VARCHAR(100) NOT NULL,
+	`authLevel` SMALLINT UNSIGNED NOT NULL DEFAULT 3 COMMENT '권한 레벨 (일반 = 3, 관리자 = 7)',
+	`name` VARCHAR(20) NOT NULL,
+	nickname VARCHAR(20) NOT NULL,
+	cellphoneNum VARCHAR(20) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	delStatus TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '탈퇴여부 (탈퇴 전 = 0, 탈퇴 후 = 1)',
+	delDate DATETIME COMMENT '탈퇴 날짜'
+);
+
+# board 테이블 생성
+CREATE TABLE board(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	`code` VARCHAR(20) NOT NULL UNIQUE COMMENT 'notice(공지사항), free(자유), ...',
+	`name` VARCHAR(20) NOT NULL UNIQUE COMMENT '게시판 이름',
+	delStatus TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '삭제여부 (삭제 전 = 0, 삭제 후 = 1)',
+	delDate DATETIME COMMENT '삭제 날짜'
+);
+
+# reactionPoint 테이블 생성
+CREATE TABLE reactionPoint(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+    memberId INT UNSIGNED NOT NULL,
+    relTypeCode VARCHAR(20) NOT NULL COMMENT '관련 데이터 타입 코드',
+    relId INT UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
+	`point` SMALLINT NOT NULL DEFAULT 0
+);
+
+
+# saveEventArticle 테이블 생성
+CREATE TABLE saveEventArticle(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+    memberId INT UNSIGNED NOT NULL,
+    relTypeCode VARCHAR(20) NOT NULL COMMENT '관련 데이터 타입 코드',
+    relId INT UNSIGNED NOT NULL COMMENT '관련 데이터 번호'
+);
+ALTER TABLE saveEventArticle ADD COLUMN save SMALLINT NOT NULL DEFAULT 1;
+
+# reply 테이블 생성
+CREATE TABLE reply(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+    memberId INT UNSIGNED NOT NULL,
+    relTypeCode VARCHAR(20) NOT NULL COMMENT '관련 데이터 타입 코드',
+    relId INT UNSIGNED NOT NULL COMMENT '관련 데이터 번호',
+	`body` TEXT NOT NULL
+);
+
+CREATE TABLE `file`(
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	regDate DATETIME NOT NULL,
+    originName VARCHAR(50) NOT NULL,
+    savedName VARCHAR(100) NOT NULL,
+    savedPath VARCHAR(100) NOT NULL
+);
+CREATE TABLE event_Kategorie(
+    id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+	updateDate DATETIME NOT NULL,
+	kategorie VARCHAR(100) NOT NULL,
+	relId INT UNSIGNED NOT NULL
+);
+SELECT * FROM `file`;
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-05-24',
+endDate = '2023-05-26',
+winningDate = '2023-06-23',
+memberId = 2,
+`name` = '메가박스',
+title = '사슴의 왕 빵원티켓 선착순 이벤트!!',
+goods = '티켓',
+needs = '선착순',
+price = 0,
+image = 'https://img.megabox.co.kr/SharedImg/event/2023/05/19/ANxPzcWa88MtC7SPkVZ5BoGBoupqXW8N.jpg',
+site = 'https://www.megabox.co.kr/event/detail?eventNo=13325';
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-05-22',
+endDate = '2023-06-26',
+winningDate = '2023-06-27',
+memberId = 1,
+`name` = '무신사스토어',
+title = '무신사 원클릭 응모 이벤트~!!',
+goods = '신발',
+needs = '응모',
+price = 1000,
+image = 'https://image.msscdn.net/contents/images/raffles/2023/4c5e95c84b16418fa16c0a0c055d49bf.png',
+site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
+
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-05-22',
+endDate = '2023-06-26',
+winningDate = '2023-07-28',
+memberId = 2,
+`name` = '베스킨라빈스',
+title = '베스킨 아이스크림 무료 나눔 이벤트^^',
+goods = '아이스크림',
+needs = '인스타',
+price = 0,
+image = 'https://www.baskinrobbins.co.kr/upload/event/image/1743759721.jpg',
+site = 'https://www.baskinrobbins.co.kr/event/list.php';
+
+# event_Kategorie 테스트 데이터;
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '영화',
+relTypeCode = 'eventArticle',
+relId = 1;
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relTypeCode ='eventArticle',
+relId = 1;
+
+
+DESC event_Kategorie
+
+
+# article 테스트 데이터
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '제목1',
+`body` = '내용1';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+boardId = 1,
+title = '제목2',
+`body` = '내용2';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+boardId = 2,
+title = '제목3',
+`body` = '내용3';
+
+# member 테스트 데이터
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'admin',
+loginPw = 'admin',
+`authLevel` = 7,
+`name` = '관리자',
+nickname = '관리자',
+cellphoneNum = '010-1111-1111',
+email = 'admin@naver.com';
+
+# member 테스트 데이터
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test1',
+loginPw = 'test1',
+`name` = '유저1',
+nickname = '유저1',
+cellphoneNum = '010-1112-1112',
+email = 'test1@naver.com';
+
+# member 테스트 데이터
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test2',
+loginPw = 'test2',
+`name` = '유저2',
+nickname = '유저2',
+cellphoneNum = '010-1113-1113',
+email = 'test2@naver.com';
+
+# board 테스트 데이터
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'notice',
+`name` = '공지사항';
+
+# board 테스트 데이터
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'free',
+`name` = '자유';
+
+# reactionPoint 테스트 데이터
+# 2번 회원이 1번 게시물에 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`point` = 1;
+
+# 2번 회원이 3번 게시물에 싫어요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 3,
+`point` = -1;
+
+# 2번 회원이 2번 게시물에 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 2,
+`point` = 1;
+
+# 3번 회원이 1번 게시물에 싫어요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`point` = -1;
+
+# 3번 회원이 3번 게시물에 좋아요
+INSERT INTO reactionPoint
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 3,
+`point` = 1;
+
+# 2번 회원이 1번 게시물에 댓글
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 1';
+
+# 2번 회원이 3번 게시물에 댓글
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+relTypeCode = 'article',
+relId = 3,
+`body` = '댓글 2';
+
+# 3번 회원이 1번 게시물에 댓글
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 3';
+
+# 3번 회원이 1번 게시물에 댓글
+INSERT INTO reply
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 3,
+relTypeCode = 'article',
+relId = 1,
+`body` = '댓글 4';
+
+SELECT * FROM article;
+SELECT * FROM `member`;
+SELECT * FROM board;
+SELECT * FROM reactionPoint;
+SELECT * FROM reply;
+DESC reactionPoint;
+SELECT LAST_INSERT_ID();
+
+/* 게시물 늘리기 쿼리
+insert into article
+(
+    regDate, updateDate, memberId, boardId, title, `body`
+)
+select now(), now(), FLOOR(RAND() * 3) + 1, FLOOR(RAND() * 2) + 1, CONcat('제목_', rand()), CONCAT('내용_', RAND())
+from article;
+*/
+
+
+DESC saveEventArticle;
+
+SHOW TABLES;
+
+TRUNCATE saveEventArticle;
+
+TRUNCATE event_Article;
+
+TRUNCATE event_Kategorie;
+
+SELECT * FROM saveEventArticle;
+SELECT * FROM event_Article;
+SELECT * FROM event_Kategorie;
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '영화',
+relId = 1;
+
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '여가',
+relId = 1;
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '패션',
+relId = 2;
+
+INSERT INTO event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relId = 3;
+
+SELECT * FROM event_Kategorie;
+
+SELECT * FROM event_Article;
+
+SELECT * 
+FROM event_Article EA
+LEFT JOIN event_Kategorie EK
+ON EK.relId = EA.id
+WHERE EA.id = 1 
+GROUP BY EA.id;

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.koreaIT.demo.repository.SaveEventArticleRepository">
+	
+	<select id="getSaveEventArticle" resultType="SaveEventArticle">
+		SELECT *
+			FROM saveEventArticle
+			WHERE memberId = #{loginedMemberId} 
+			AND relId = #{relId}
+			AND relTypeCode = #{relTypeCode}
+	</select>
+	
+	<select id="getSaveEventArticles" resultType="EventArticle">
+		SELECT EA.* 
+		        , IFNULL(SEA.save, 0) AS save
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    <if test="progress == 1">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="progress == 0">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+	</select>
+	
+	<select id="getSaveEventArticleCnt" resultType="int">
+		SELECT COUNT(*)
+		    FROM event_Article AS EA
+		    LEFT JOIN (SELECT * FROM saveEventArticle WHERE memberId = #{loginedMemberId} ) AS SEA
+		    ON EA.id = SEA.relId
+		    WHERE SEA.save = 1
+		    <if test="progress == 1">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="progress == 0">
+		    	AND EA.progress = #{progress}
+		    </if>
+		    <if test="searchKeyword != ''">
+		    	AND (
+					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.goods LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.needs LIKE CONCAT('%', #{searchKeyword}, '%')
+					OR EA.price LIKE CONCAT('%', #{searchKeyword}, '%')
+				)
+		    </if>
+		    ORDER BY SEA.regDate DESC
+	</select>
+	
+	<insert id="doInsertSaveEventArticle">
+		INSERT INTO saveEventArticle
+			SET regDate = NOW(),
+				updateDate = NOW(),
+				memberId = #{loginedMemberId},
+				relTypeCode = #{relTypeCode},
+				relId = #{relId}
+	</insert>
+	
+	<delete id="doDeleteSaveEventArticle">
+		DELETE FROM saveEventArticle
+			WHERE memberId = #{loginedMemberId} 
+			AND relId = #{relId}
+			AND relTypeCode = #{relTypeCode}
+	</delete>
+	
+</mapper>
