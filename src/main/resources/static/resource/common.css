@@ -196,6 +196,14 @@ html > body .toast-ui-viewer .toastui-editor-contents {
 	left: 80%;
 	transform: translate( 90%, 20% );
 }
+
+.list-progress {
+	position: absolute;
+	top: 5%;
+	left: -50px;
+	transform: translate( 90%, 20% );
+}
+
 .list-save-icon {
 	font-size: 30px;
 	position: relative;
@@ -586,7 +594,7 @@ body {
     justify-content: center;
 }
 .btn-hover:hover{
-	filter: brightness(10%);
+	filter: brightness(90%);
 }
 .writeEvent-imageURL{
 	position: absolute;
@@ -660,4 +668,16 @@ body {
 .eventAticle-modify-btn:hover {
 	background-color: #1266FF;
 	color: #fff;
+}
+
+.kakao-btn{
+	background-color: yellow;
+	width: 200px;
+	height: 33px;
+	border-radius: 3px;
+	text-align: center;
+}
+.kakao-btn-li{
+	width: 200px;
+	height: 33px;
 }

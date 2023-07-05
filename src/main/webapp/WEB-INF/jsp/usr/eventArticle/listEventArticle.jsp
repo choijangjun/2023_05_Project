@@ -11,10 +11,10 @@
 	</script>
 	<section class="listEventArticle-main">
 		<div class="mx-auto ">
-			<div><span>진행중인 이벤트 : ${eventArticlesCnt } 개</span></div>
-			<div class="ml-6">실시간 가장 핫한 이벤트</div>
+			<div><span>이벤트 : ${eventArticlesCnt } 개</span></div>
 			<div class="text-center">
 				<c:forEach var="eventArticle" items="${eventArticles }">
+					
 						<div class="main-img inline-block m-2">
 							<div class="main-img-div">
 								<a class="main-img-a" target="_blank" href="${eventArticle.site }">
@@ -25,7 +25,17 @@
 									<img class="main-img" src="/usr/eventArticle/file/${eventArticle.id}" />
 								</c:if>
 								</a>
-								
+								<div class="list-progress">
+									<c:if test="${eventArticle.progress == 1}">
+										<span class="saveEvent-Tbody-progress" style="background-color: #47C83E;">진행중</span>
+									</c:if>
+									<c:if test="${eventArticle.progress == 0}">
+										<span class="saveEvent-Tbody-progress" style="background-color: #FF0000;">종료됨</span>
+									</c:if>
+									<c:if test="${eventArticle.progress == 2}">
+										<span class="saveEvent-Tbody-progress" style="background-color: #BDBDBD;">준비중</span>
+									</c:if>
+								</div>
 								<c:if test="${rq.getLoginedMemberId() == 0 }">
 									<button class="list-save-button" onClick="pleaseLogin()">
 										<i class="list-save-icon fa-regular fa-star" ></i>

@@ -5,7 +5,13 @@
 	
 	<update id="updateEventArticlePG">
 		UPDATE event_Article
-			SET progress = IF( startDate &lt;= NOW() AND endDate > NOW() , 1, 0)
+			SET progress = (
+			       CASE
+			       WHEN startDate &lt;= NOW() AND endDate > NOW() THEN 1
+			       WHEN endDate &lt; NOW() THEN 0
+			       ELSE 2
+			       END
+			      )
 	</update>
 	
 	<select id="getEventArticle" resultType="EventArticle">
@@ -32,7 +38,13 @@
 				price = #{price},
 				image = #{image},
 				site = #{site},
-				progress = IF( startDate &lt;= NOW() AND endDate > NOW() , 1, 0)
+				progress = (
+			       CASE
+			       WHEN startDate &lt;= NOW() AND endDate > NOW() THEN 1
+			       WHEN endDate &lt; NOW() THEN 0
+			       ELSE 2
+			       END
+			      )
 	</insert>
 	
 	<insert id="doInsertKategorie" parameterType="java.util.List" >
@@ -55,8 +67,14 @@
 				price = #{price},
 				image = #{image},
 				site = #{site},
-				progress = IF( startDate &lt;= NOW() AND endDate > NOW() , 1, 0)
-			WHERE id = #{id}
+				progress = (
+			       CASE
+			       WHEN startDate &lt;= NOW() AND endDate > NOW() THEN 1
+			       WHEN endDate &lt; NOW() THEN 0
+			       ELSE 2
+			       END
+			      )
+				WHERE id = #{id}
 	</update>
 	
 	
@@ -183,6 +201,7 @@
 		    <if test="progress == 0">
 		    	AND EA.progress = #{progress}
 		    </if>
+		    
 		    <if test="searchKeyword != ''">
 		    	AND (
 					EA.name LIKE CONCAT('%', #{searchKeyword}, '%')

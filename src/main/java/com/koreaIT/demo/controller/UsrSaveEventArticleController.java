@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koreaIT.demo.service.EventArticleService;
 import com.koreaIT.demo.service.SaveEventArticleService;
 import com.koreaIT.demo.vo.EventArticle;
 import com.koreaIT.demo.vo.Rq;
@@ -17,11 +18,13 @@ import com.koreaIT.demo.vo.SaveEventArticle;
 public class UsrSaveEventArticleController {
 
 	private SaveEventArticleService saveEventArticleService;
+	private EventArticleService eventArticleService;
 	private Rq rq;
 	
 	@Autowired
-	public UsrSaveEventArticleController(SaveEventArticleService saveEventArticleService, Rq rq) {
+	public UsrSaveEventArticleController(SaveEventArticleService saveEventArticleService, EventArticleService eventArticleService,Rq rq) {
 		this.saveEventArticleService = saveEventArticleService;
+		this.eventArticleService = eventArticleService;
 		this.rq = rq;
 	}
 	
@@ -36,8 +39,8 @@ public class UsrSaveEventArticleController {
 	
 	@RequestMapping("/usr/myPage/mySaveEventArticle")
 	public String showSaveList(Model model, @RequestParam(defaultValue = "1") int page, 
-			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "2") int progress) {
-		
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "3") int progress) {
+		eventArticleService.updateEventArticlePG();
 		int saveEventArticleCnt = saveEventArticleService.getSaveEventArticleCnt(rq.getLoginedMemberId(), searchKeyword, progress);
 		int itemsInAPage = 15;
 		

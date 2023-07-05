@@ -1,22 +1,21 @@
 package com.koreaIT.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.koreaIT.demo.service.AuthService;
 import com.koreaIT.demo.service.CustomMessageService;
 
 @RestController
 public class BaseController {
 
-	@Autowired
+	@Autowired 
 	AuthService authService;
 
 	@Autowired
 	CustomMessageService customMEssageService;
 
-	@GetMapping("/a")
+	@RequestMapping("/kakaotalk")
 	public String serviceStart(String code) {
 		if(authService.getKakaoAuthToken(code)) {
 			customMEssageService.sendMyMessage();
@@ -24,5 +23,5 @@ public class BaseController {
 		}else {
 			return "토큰발급 실패";
 		}
-	}
+	} 
 }

@@ -1,7 +1,5 @@
 package com.koreaIT.demo.service;
 
-import java.util.Locale;
-
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

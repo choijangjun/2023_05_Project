@@ -1,5 +1,4 @@
 package com.koreaIT.demo.service;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +12,11 @@ public class CustomMessageService {
 
 	public boolean sendMyMessage() {
 		DefaultMessageDto myMsg = new DefaultMessageDto();
-		myMsg.setBtnTitle("자세히보기");
-		myMsg.setMobileUrl("");
-		myMsg.setObjType("text");
+		myMsg.setBtnTitle("이벤트 자세히 보러가기");
 		myMsg.setWebUrl("");
-		myMsg.setText("메시지 테스트입니다.");
+		myMsg.setObjType("text");
+		myMsg.setMobileUrl("");
+		myMsg.setText("https://www.musinsa.com/event/raffles?raffles_include_state=A");
 
 		String accessToken = AuthService.authToken;
 

@@ -26,7 +26,6 @@ CREATE TABLE event_Article(
     memberId INT UNSIGNED NOT NULL ,
     `name` VARCHAR(50) NOT NULL,
     `title` VARCHAR(50) NOT NULL,
-    section VARCHAR(50) NOT NULL COMMENT 'movie(영화), food(음식), dessert(디저트), fashion(패션), phoneplan(요금제)',
     goods VARCHAR(50) NOT NULL COMMENT '상품',
     needs VARCHAR(50) NOT NULL COMMENT '참여조건',
     price INT DEFAULT 0 COMMENT '가격',
@@ -35,6 +34,7 @@ CREATE TABLE event_Article(
     hitCount INT UNSIGNED NOT NULL DEFAULT 0
 );
 ALTER TABLE event_Article MODIFY COLUMN image VARCHAR(40000) NOT NULL;
+ALTER TABLE event_Article MODIFY COLUMN progress SMALLINT NOT NULL DEFAULT 2;
 
 
 
@@ -170,6 +170,39 @@ price = 0,
 image = 'https://www.baskinrobbins.co.kr/upload/event/image/1743759721.jpg',
 site = 'https://www.baskinrobbins.co.kr/event/list.php';
 
+# event_Article 테스트 데이터
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-05-22',
+endDate = '2023-07-26',
+winningDate = '2023-07-28',
+memberId = 2,
+`name` = '무신사',
+title = '무신사 응모 이벤트 샤넬 부츠',
+goods = '샤넬 부츠',
+needs = '첫구매 후 응모',
+price = 0,
+image = 'https://image.msscdn.net/contents/images/raffles/2023/0d9d7eacf76a4c1a85ad1240483011e0.png',
+site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
+
+
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-07-22',
+endDate = '2023-07-28',
+winningDate = '2023-07-29',
+memberId = 2,
+`name` = 'KT',
+title = 'KT 디저트 이벤트!',
+goods = '각종 디저트',
+needs = '카카오톡 공유',
+price = 0,
+image = 'https://benefit.kt.com/roaming/event/23kato/img/img_visual.jpg',
+site = 'https://event.kt.com/html/event/ongoing_event_view.html?page=3&searchCtg=ALL&sort=hot&pcEvtNo=12680';
+
+SELECT * FROM event_Article;
 # event_Kategorie 테스트 데이터;
 INSERT event_Kategorie
 SET regDate = NOW(),
@@ -183,10 +216,30 @@ SET regDate = NOW(),
 updateDate = NOW(),
 kategorie = '디저트',
 relTypeCode ='eventArticle',
-relId = 1;
+relId = 2;
 
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '패션',
+relTypeCode ='eventArticle',
+relId = 3;
 
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '패션',
+relTypeCode ='eventArticle',
+relId = 4;
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relTypeCode ='eventArticle',
+relId = 5;
 DESC event_Kategorie
+
 
 
 # article 테스트 데이터
@@ -411,3 +464,14 @@ LEFT JOIN event_Kategorie EK
 ON EK.relId = EA.id
 WHERE EA.id = 1 
 GROUP BY EA.id;
+
+UPDATE event_Article
+	SET progress = (
+       CASE
+       WHEN startDate <= NOW() AND endDate > NOW() THEN 1
+       WHEN endDate < NOW() THEN 0
+       ELSE 2
+       END
+       );
+       
+SELECT * FROM event_Article;

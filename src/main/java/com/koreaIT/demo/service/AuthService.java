@@ -1,5 +1,4 @@
 package com.koreaIT.demo.service;
-
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +28,7 @@ public class AuthService extends HttpCallService{
 		parameters.add("code", code);
 		parameters.add("grant_type", "authorization_code");
 		parameters.add("client_id", "2158fb2a838a4c24d9390600c33aff2b");
-		parameters.add("redirect_url", "http://127.0.0.1:8082/a");
+		parameters.add("redirect_url", "http://127.0.0.1:8082/kakaotalk");
 		parameters.add("client_secret", "2kuMzGKPzROrGfnAXDfV1X71zWL1rfpt");
 
 		HttpEntity<?> requestEntity = httpClientEntity(header, parameters);

@@ -14,7 +14,7 @@
 					<div id="myPage-eventArticle" class="myPage-eventArticle">
 						<div class="myPage-eventArticle-div">
 							<ul>
-								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myWriteEventArticle"><button id="savedEventArticle" class="myPage-eventArticle-button" name=progress value="2">전체 이벤트</button></form></li>
+								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myWriteEventArticle"><button id="savedEventArticle" class="myPage-eventArticle-button" name=progress value="3">전체 이벤트</button></form></li>
 								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myWriteEventArticle"><button id="goSavedEventArticle" class="myPage-eventArticle-button" name=progress value="1">진행중인 이벤트</button></form></li>
 								<li class="myPage-eventArticle-li"><form action="/usr/myPage/myWriteEventArticle"><button id="endSavedEventArticle" class="myPage-eventArticle-button" name=progress value="0">종료된 이벤트</button></form></li>
 							</ul>
@@ -29,7 +29,7 @@
 								</form>
 							</div>
 							<div class="myEventArticle-delete-div">
-								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button btn-hover">삭제</button>
 							</div>
 						</div>
 						<div class="myEventArticle-table-div">
@@ -53,6 +53,9 @@
 														</c:if>
 														<c:if test="${myWriteEventArticle.progress == 0}">
 															<span class="saveEvent-Tbody-progress" style="background-color: #FF0000;">종료됨</span>
+														</c:if>
+														<c:if test="${myWriteEventArticle.progress == 2}">
+															<span class="saveEvent-Tbody-progress" style="background-color: #BDBDBD;">준비중</span>
 														</c:if>
 													</span>
 												</div>
@@ -102,7 +105,7 @@
 						<div class="myEventArticle-article-foot">
 							<div>
 								<form action="/usr/eventArticle/writeEventArticle">
-									<button class="myEventArticle-write-button">등록하기</button>
+									<button class="myEventArticle-write-button btn-hover">등록하기</button>
 								</form>
 							</div>
 							<div class="page-click-div">
@@ -119,7 +122,7 @@
 								</c:if>
 							</div>
 							<div class="myEventArticle-delete-div">
-								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button">삭제</button>
+								<button id="myEventArticle-delete-button" class="myEventArticle-delete-button btn-hover">삭제</button>
 							</div>
 						</div>
 					</article>
@@ -171,7 +174,7 @@
 </script>
 <script>
 	$(function(){
-		if(${progress} == 2){
+		if(${progress} == 3){
 			$("#savedEventArticle").css({
 				"border": "2px solid #489CFF",
 				"border-bottom": "2px solid #FFF",

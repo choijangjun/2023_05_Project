@@ -13,7 +13,6 @@ public class MyEventArticle {
 	private String updateDate;
 	private int memberId;
 	private String name;
-	private String section;
 	private String goods;
 	private String needs;
 	private int price;

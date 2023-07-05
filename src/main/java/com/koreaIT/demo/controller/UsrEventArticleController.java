@@ -88,8 +88,8 @@ public class UsrEventArticleController {
 	
 	@RequestMapping("/usr/myPage/myWriteEventArticle")
 	public String showSaveList(Model model, @RequestParam(defaultValue = "1") int page, 
-			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "2") int progress) {
-		
+			@RequestParam(defaultValue = "") String searchKeyword, @RequestParam(defaultValue = "3") int progress) {
+		eventArticleService.updateEventArticlePG();
 		int myWriteEventArticleCnt = eventArticleService.getMyWriteEventArticleCnt(rq.getLoginedMemberId(), searchKeyword, progress);
 		int itemsInAPage = 15;
 		
