@@ -113,7 +113,6 @@ CREATE TABLE event_Kategorie(
 	relId INT UNSIGNED NOT NULL
 );
 
-
 # event_Article 테스트 데이터
 INSERT INTO event_Article
 SET regDate = NOW(),
@@ -145,6 +144,36 @@ needs = '응모',
 price = 1000,
 image = 'https://image.msscdn.net/contents/images/raffles/2023/4c5e95c84b16418fa16c0a0c055d49bf.png',
 site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
+
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-10-12',
+endDate = '2023-10-22',
+winningDate = '2023-10-23',
+memberId = 2,
+`name` = '무신사',
+title = '무신사 래플 이벤트',
+goods = '블루투스 이어폰',
+needs = '회원가입후 응모',
+price = 1000,
+image = 'https://image.msscdn.net/contents/images/raffles/2023/b3140a8fc7ad468891a4242a5b99f6b6.jpg',
+site = 'https://www.musinsa.com/event/raffles/703';
+
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-10-17',
+endDate = '2023-10-18',
+winningDate = '2023-10-18',
+memberId = 2,
+`name` = '메가박스',
+title = '메가박스에서 하는 빵원티켓',
+goods = '괴담만찬 영화 티켓',
+needs = '선착순 2000명',
+price = 0,
+image = 'https://img.megabox.co.kr/SharedImg/event/2023/10/05/xNqP9F0nXpL7QELvJnF60yngB1XugXWM.jpg',
+site = 'https://www.megabox.co.kr/event/detail?eventNo=14214';
 
 # event_Article 테스트 데이터
 INSERT INTO event_Article
@@ -179,6 +208,52 @@ image = 'https://image.msscdn.net/contents/images/raffles/2023/0d9d7eacf76a4c1a8
 site = 'https://www.musinsa.com/event/raffles?raffles_include_state=A';
 
 
+
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-10-04',
+endDate = '2023-12-31',
+winningDate = '2023-12-31',
+memberId = 2,
+`name` = '베스킨라빈스',
+title = 'KT 멤버십 레디팩 50% 할인',
+goods = '레디팩 아이스크림',
+needs = 'KT 멤버십',
+price = 4500,
+image = 'https://www.baskinrobbins.co.kr/upload/event/image/1741484430.jpg',
+site = 'https://www.baskinrobbins.co.kr/event/view.php?flag=A&seq=14604';
+
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-10-04',
+endDate = '2023-12-04',
+winningDate = '2023-12-04',
+memberId = 2,
+`name` = '베스킨라빈스',
+title = '쿼터이상 구매시 노티드 우산 7500원',
+goods = '노티드 우산',
+needs = '쿼터이상 구매시',
+price = 7500,
+image = 'https://www.baskinrobbins.co.kr/upload/event/image/1691541558.png',
+site = 'https://www.baskinrobbins.co.kr/event/view.php?flag=A&seq=14384';
+
+INSERT INTO event_Article
+SET regDate = NOW(),
+updateDate = NOW(),
+startDate = '2023-07-22',
+endDate = '2023-07-28',
+winningDate = '2023-07-29',
+memberId = 2,
+`name` = '무신사',
+title = '무신사에서 응모만 하면 아이폰 15pro 추첨',
+goods = '아이폰 15 pro',
+needs = '회원가입 후 응모',
+price = 1000,
+image = 'https://image.msscdn.net/contents/images/raffles/2023/f498afe591c14051b97142f21121406d.jpg',
+site = 'https://www.musinsa.com/event/raffles/699';
+
 INSERT INTO event_Article
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -194,6 +269,8 @@ price = 0,
 image = 'https://benefit.kt.com/roaming/event/23kato/img/img_visual.jpg',
 site = 'https://event.kt.com/html/event/ongoing_event_view.html?page=3&searchCtg=ALL&sort=hot&pcEvtNo=12680';
 
+
+
 SELECT * FROM event_Article;
 # event_Kategorie 테스트 데이터;
 INSERT event_Kategorie
@@ -205,7 +282,7 @@ relId = 1;
 INSERT event_Kategorie
 SET regDate = NOW(),
 updateDate = NOW(),
-kategorie = '디저트',
+kategorie = '패션',
 relId = 2;
 
 INSERT event_Kategorie
@@ -217,7 +294,7 @@ relId = 3;
 INSERT event_Kategorie
 SET regDate = NOW(),
 updateDate = NOW(),
-kategorie = '패션',
+kategorie = '영화',
 relId = 4;
 
 INSERT event_Kategorie
@@ -225,9 +302,42 @@ SET regDate = NOW(),
 updateDate = NOW(),
 kategorie = '디저트',
 relId = 5;
-DESC event_Kategorie
 
 
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '패션',
+relId = 6;
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relId = 7;
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relId = 8;
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '패션',
+relId = 9;
+
+
+
+INSERT event_Kategorie
+SET regDate = NOW(),
+updateDate = NOW(),
+kategorie = '디저트',
+relId = 10;
+
+SELECT * FROM event_kategorie;
 
 # article 테스트 데이터
 INSERT INTO article
