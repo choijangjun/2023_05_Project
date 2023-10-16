@@ -1,7 +1,10 @@
 package com.koreaIT.demo.controller;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,7 @@ import com.koreaIT.demo.vo.EventArticle;
 import com.koreaIT.demo.vo.Rq;
 import com.koreaIT.demo.vo.SaveEventArticle;
 
+@SpringBootApplication
 @Controller
 public class UsrSaveEventArticleController {
 
@@ -36,6 +40,11 @@ public class UsrSaveEventArticleController {
 		
 		return saveEventArticle;
 	}
+	
+    
+    public void testScheduled() {
+    	System.out.println("테스트 성공!!");
+    }
 	
 	@RequestMapping("/usr/myPage/mySaveEventArticle")
 	public String showSaveList(Model model, @RequestParam(defaultValue = "1") int page, 

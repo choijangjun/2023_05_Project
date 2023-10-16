@@ -4,12 +4,13 @@ import org.springframework.stereotype.Service;
 
 import com.koreaIT.demo.dto.DefaultMessageDto;
 
+
 @Service
 public class CustomMessageService {
 
 	@Autowired
 	MessageService messageService;
-
+	
 	public boolean sendMyMessage() {
 		DefaultMessageDto myMsg = new DefaultMessageDto();
 		myMsg.setBtnTitle("이벤트 자세히 보러가기");

@@ -33,11 +33,12 @@ public class FileUpload {
 	
 	
 
+	
+	
+	
 	@RequestMapping("/usr/eventArticle/imageUpload")
 	@ResponseBody
 	public String uploadFile(MultipartFile file, @RequestParam(defaultValue = "eventArticle") String relTypeCode) {
-		
-		
 		
 		try {
 			
