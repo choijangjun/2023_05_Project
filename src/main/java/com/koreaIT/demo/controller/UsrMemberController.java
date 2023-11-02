@@ -2,7 +2,9 @@ package com.koreaIT.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreaIT.demo.service.MemberService;
@@ -22,6 +24,8 @@ public class UsrMemberController {
 		this.memberService = memberService;
 		this.rq = rq;
 	}
+	
+	
 	
 	@RequestMapping("/usr/member/join")
 	public String join() {
@@ -50,7 +54,6 @@ public class UsrMemberController {
 		if (Util.empty(email)) {
 			return Util.jsHistoryBack("이메일을 입력해주세요");
 		}
-		
 		ResultData<Integer> doJoinRd = memberService.doJoin(loginId, loginPw, name, nickname, cellphoneNum, email);
 		
 		if (doJoinRd.isFail()) {
@@ -82,6 +85,8 @@ public class UsrMemberController {
 		return "usr/member/login";
 	}
 	
+	
+	
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
 	public String doLogin(String loginId, String loginPw) {
@@ -111,6 +116,9 @@ public class UsrMemberController {
 		
 		return Util.jsReplace(Util.f("%s 회원님 환영합니다~!", member.getNickname()), "/");
 	}
+	
+	
+	
 	
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody

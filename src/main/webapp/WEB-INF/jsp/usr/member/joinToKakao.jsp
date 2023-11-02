@@ -149,7 +149,7 @@
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td><input class="input input-bordered w-full max-w-xs" type="text" name="email" placeholder="이메일을 입력해주세요"/></td>
+								<td><div>${email }</div><input class="input input-bordered w-full max-w-xs" type="hidden" name="email"  value="${email }"/></td>
 							</tr>
 							<tr>
 								<td colspan="2"><button class="btn-text-link btn btn-active">회원가입</button></td>

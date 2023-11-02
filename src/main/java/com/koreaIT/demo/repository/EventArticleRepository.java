@@ -1,6 +1,6 @@
 package com.koreaIT.demo.repository;
 
-import java.util.List;
+import java.util.List;	
 
 import org.apache.ibatis.annotations.Mapper;
 

@@ -19,7 +19,7 @@
 <script src="/resource/common.js" defer="defer"></script>
 </head>
 <body>
-	<header class="head-header text-sm border-bottom-line ">
+	<header class="head-header text-sm border-bottom-line">
 		<div class ="flex items-center">
 			<a href="/" class="flex h-10 w-20 image-box overflow-hidden items-center mx-3"><img class="object-cover " src="/resource/images/logo.png" /></a>
 			<a class=" hover:underline h-full px-3 flex items-center" href="/usr/eventArticle/writeEventArticle"><span>이벤트 공유</span></a>

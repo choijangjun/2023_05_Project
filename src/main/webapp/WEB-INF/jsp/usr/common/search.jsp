@@ -19,7 +19,7 @@
 				
 				<div class="flex">
 					<div class="search-section-div">
-						<div >
+						<div>
 							<button id="search-button-title" class="search-button-title">
 								<span class="mx-2">분야</span>
 								<i id="arrow" class="fa-solid fa-caret-down "></i>
@@ -50,6 +50,7 @@
 			</div>  
 		</div>
 	</section>
+	<div class="search-body"></div>
 <script>
 	$(function(){
 		$('input:checkbox[name=checkKeyword]').change(function(){
@@ -124,4 +125,3 @@
 	
 <script>
 </script>
-<%@ include file="../common/foot.jsp" %>

@@ -47,6 +47,14 @@ public interface MemberRepository {
 			""")
 	public Member getMemberByNickname(String nickname);
 
+	
+	@Select("""
+			SELECT *
+				FROM `member`
+				WHERE email = #{email}
+			""")
+	public Member getMemberByEmail(String email);
+	
 	@Select("""
 			SELECT *
 				FROM `member`
@@ -72,5 +80,7 @@ public interface MemberRepository {
 				WHERE id = #{loginedMemberId}
 			""")
 	public void doPasswordModify(int loginedMemberId, String loginPw);
+
+	
 
 }
