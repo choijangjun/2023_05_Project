@@ -670,25 +670,80 @@ body {
 	color: #fff;
 }
 
-.kakao-btn{
-	background-color: rgb(254, 229, 0);
-	width: 200px;
-	height: 56px;
-	border-radius: 6px;
-	text-align: center;
-	font-weight: 700;
-}
-.kakao-btn-li{
-	width: 200px;
-	height: 33px;
-}
+
 
 .loginBox{
 	background-color: #fff;
 	width: 500px;
-	height: 500px;
-	border: 1px ;
+	height: auto;
+	border: 1px solid #F3F3F3;
 	margin: 0 auto;
+	padding: 70px;
+}
+
+.header-loginId{
+	margin-bottom: 8px;
+}
+
+.header-loginPw{
+	margin-bottom: 8px;
+	margin-top: 16px;
+}
+.input-box{
+	width: 100%;
+	height: 44px;
+}
+.input-loginId{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #F3F3F3;
+	padding: 0px 16px;
+}
+.input-loginPw{
+	width: 100%;
+	height: 100%;
+	border: 1px solid #F3F3F3;
+	padding: 0px 16px;
+}
+.input-loginId:focus{
+	border: 1px solid #000;
+	outline: none;
+}
+.input-loginPw:focus {
+	border: 1px solid #000;
+	outline: none;
+}
+.login-box{
+	margin-top: 30px;
+	
+}
+.login-btn{
+	width: 100%;
+	height: 56px;
+	line-height:24px;
+	border-radius: 6px;
+	font-size:14px;
+	font-weight: 700;
+	text-align: center;
+	padding: 15px;
+	background-color: #4948FF;
+	color: #FFFFFF;
+}
+.kakaoLogin-box{
+	margin-top: 50px;
+	
+}
+.kakao-btn{
+	width: 100%;
+	height: 56px;
+	line-height:24px;
+	border-radius: 6px;
+	font-size:14px;
+	font-weight: 700;
+	text-align: center;
+	padding: 15px;
+	display: inline-block;
+	background: url("https://www.dabangapp.com/static/media/talk.ec3b5405.svg") left 16px center / 30px 30px no-repeat rgb(254, 229, 0);
 }
 
 .foot-ad{

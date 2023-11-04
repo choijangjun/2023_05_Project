@@ -60,8 +60,15 @@ public class UsrMemberController {
 			return Util.jsHistoryBack(doJoinRd.getMsg());
 		}
 		
+		if(rq.getLoginedMember() == null) {
+			doLogin(loginId,loginPw);
+		}
+		
 		return Util.jsReplace(doJoinRd.getMsg(), "/");
 	}
+	
+	
+	
 	
 	@RequestMapping("/usr/member/loginIdDupCheck")
 	@ResponseBody
