@@ -24,7 +24,7 @@
 			 	</div>
 			</form>
 			<div class="kakaoLogin-box">
-			      <a class="kakao-btn" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1ce061089c0f3113b3087e913c3f1f8a&redirect_uri=http://127.0.0.1:8082/usr/member/kakaoOauth" >카카오 로그인</a>
+			      <a class="kakao-btn" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1ce061089c0f3113b3087e913c3f1f8a&redirect_uri=http://127.0.0.1:8082/usr/member/kakaoLogin">카카오 로그인</a>
 			</div>
 		</div>
 	</section>

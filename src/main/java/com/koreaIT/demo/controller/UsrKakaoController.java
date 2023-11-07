@@ -1,13 +1,13 @@
 package com.koreaIT.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koreaIT.demo.dto.KakaoFriendsResponse;
 import com.koreaIT.demo.dto.KakaoTokenResponse;
 import com.koreaIT.demo.dto.KakaoUserInfoResponse;
 import com.koreaIT.demo.service.MemberService;
@@ -22,23 +22,29 @@ import lombok.extern.slf4j.Slf4j;
 public class UsrKakaoController {
 	private final KakaoTokenJsonData kakaoTokenJsonData;
 	private final KakaoUserInfo kakaoUserInfo;
+	private final KakaoFriendsInfo kakaoFriendsInfo;
+	private final KakaoLogout kakaoLogout;
 	private MemberService memberService;
 	private Rq rq;
 	
 	@Autowired
-	public UsrKakaoController(KakaoTokenJsonData kakaoTokenJsonData,KakaoUserInfo kakaoUserInfo,  MemberService memberService, Rq rq) {
+	public UsrKakaoController(KakaoTokenJsonData kakaoTokenJsonData,KakaoUserInfo kakaoUserInfo, KakaoFriendsInfo kakaoFriendsInfo, KakaoLogout kakaoLogout,  MemberService memberService, Rq rq) {
 		this.kakaoTokenJsonData = kakaoTokenJsonData;
 		this.kakaoUserInfo = kakaoUserInfo;
+		this.kakaoFriendsInfo = kakaoFriendsInfo;
+		this.kakaoLogout = kakaoLogout;
 		this.memberService = memberService;
 		this.rq = rq;
 	}
 	
-	@RequestMapping("/usr/member/kakaoOauth")
-	public String kakaoOauth(@RequestParam("code") String code, Model model) {
+	@RequestMapping("/usr/member/kakaoLogin")
+	public String kakaoLogin(@RequestParam("code") String code, Model model) {
+		
+		String type = "kakaoLogin";
 		
 		log.info("인가 코드를 이용하여 토큰을 받습니다.", code);
 		
-        KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(code);
+        KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(type, code);
         log.info("토큰에 대한 정보입니다.{}",kakaoTokenResponse);
         
         KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(kakaoTokenResponse.getAccess_token());
@@ -54,9 +60,44 @@ public class UsrKakaoController {
     		
     	} else if(member != null) {
     		
-    		doKakaoLogin(member.getEmail());
-    		
+    		rq.login(member);   		
     	}
+        
+		return "redirect:/usr/eventArticle/listEventArticle";
+	}
+	
+	@RequestMapping("/usr/member/kakaoLogout")
+	public String kakaoLogout(@RequestParam("code") String code) {
+		String type = "kakaoLogout";
+		
+		log.info("인가 코드를 이용하여 토큰을 받습니다.", code);
+		
+        KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(type, code);
+        log.info("토큰에 대한 정보입니다.{}",kakaoTokenResponse);
+        
+        
+        kakaoLogout.doKakaoLogout(kakaoTokenResponse.getAccess_token());
+        
+        rq.logout();
+        
+		return "redirect:/usr/eventArticle/listEventArticle";
+	}
+	
+	@RequestMapping("/usr/member/kakaoMessage")
+	public String kakaoMessage(@RequestParam("code") String code, Model model) {
+		String type = "kakaoMessage";
+		log.info("인가 코드를 이용하여 토큰을 받습니다.", code);
+		
+        KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(type ,code);
+        log.info("토큰에 대한 정보입니다.{}",kakaoTokenResponse);
+        
+        KakaoFriendsResponse friendsUuid = kakaoFriendsInfo.getFreindsUuid(kakaoTokenResponse.getAccess_token());
+        log.info("친구들의 정보 입니다.{}",friendsUuid);
+        
+        String uuid = friendsUuid.getUuid();
+        log.info("친구의 uuid에 대한 정보입니다.{}", uuid);
+        
+        
         
 		return "redirect:/usr/eventArticle/listEventArticle";
 	}

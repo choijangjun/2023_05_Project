@@ -21,6 +21,7 @@ public class Rq {
 	
 	@Getter
 	private int loginedMemberId;
+	private String kakaoToken;
 	@Getter
 	private Member loginedMember;
 	private HttpServletRequest req;

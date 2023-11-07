@@ -17,6 +17,7 @@ import com.koreaIT.demo.vo.Rq;
 public class UsrMemberController {
 	
 	private MemberService memberService;
+	KakaoFriendsInfo kakaoFriendsInfo;
 	private Rq rq;
 	
 	@Autowired
