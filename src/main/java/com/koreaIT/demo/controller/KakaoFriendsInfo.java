@@ -1,6 +1,6 @@
 package com.koreaIT.demo.controller;
 
-import org.springframework.stereotype.Component;	
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.koreaIT.demo.dto.KakaoFriendsResponse;

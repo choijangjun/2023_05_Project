@@ -38,6 +38,7 @@
 			<c:if test="${rq.getLoginedMemberId() != 0  }">
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="/usr/member/myPage"><span>마이페이지</span></a></li>
 				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1ce061089c0f3113b3087e913c3f1f8a&redirect_uri=http://127.0.0.1:8082/usr/member/kakaoLogout"><span>로그아웃</span></a></li>
+				<li class="hover:underline"><a class="h-full px-3 flex items-center" href="https://kauth.kakao.com/oauth/logout?client_id=1ce061089c0f3113b3087e913c3f1f8a&logout_redirect_uri=http://127.0.0.1:8082/usr/member/doLogout"><span>카카오계정 로그아웃</span></a></li>
 			</c:if>
 			<li class="mr-3"></li>
 		</ul>

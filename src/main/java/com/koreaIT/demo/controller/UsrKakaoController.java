@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koreaIT.demo.dto.FailureInfo;
+import com.koreaIT.demo.dto.Friend;
 import com.koreaIT.demo.dto.KakaoFriendsResponse;
 import com.koreaIT.demo.dto.KakaoTokenResponse;
 import com.koreaIT.demo.dto.KakaoUserInfoResponse;
@@ -23,15 +25,17 @@ public class UsrKakaoController {
 	private final KakaoTokenJsonData kakaoTokenJsonData;
 	private final KakaoUserInfo kakaoUserInfo;
 	private final KakaoFriendsInfo kakaoFriendsInfo;
+	private final KakaoMessage kakaoMessage;
 	private final KakaoLogout kakaoLogout;
 	private MemberService memberService;
 	private Rq rq;
 	
 	@Autowired
-	public UsrKakaoController(KakaoTokenJsonData kakaoTokenJsonData,KakaoUserInfo kakaoUserInfo, KakaoFriendsInfo kakaoFriendsInfo, KakaoLogout kakaoLogout,  MemberService memberService, Rq rq) {
+	public UsrKakaoController(KakaoTokenJsonData kakaoTokenJsonData,KakaoUserInfo kakaoUserInfo, KakaoFriendsInfo kakaoFriendsInfo, KakaoMessage kakaoMessage, KakaoLogout kakaoLogout,  MemberService memberService, Rq rq) {
 		this.kakaoTokenJsonData = kakaoTokenJsonData;
 		this.kakaoUserInfo = kakaoUserInfo;
 		this.kakaoFriendsInfo = kakaoFriendsInfo;
+		this.kakaoMessage = kakaoMessage;
 		this.kakaoLogout = kakaoLogout;
 		this.memberService = memberService;
 		this.rq = rq;
@@ -91,13 +95,16 @@ public class UsrKakaoController {
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(type ,code);
         log.info("토큰에 대한 정보입니다.{}",kakaoTokenResponse);
         
-        KakaoFriendsResponse friendsUuid = kakaoFriendsInfo.getFreindsUuid(kakaoTokenResponse.getAccess_token());
-        log.info("친구들의 정보 입니다.{}",friendsUuid);
+        KakaoFriendsResponse friendsInfo = kakaoFriendsInfo.getFreindsUuid(kakaoTokenResponse.getAccess_token());
+        log.info("친구들의 정보 입니다.{}",friendsInfo);
         
-        String uuid = friendsUuid.getUuid();
-        log.info("친구의 uuid에 대한 정보입니다.{}", uuid);
+        Friend[] friends = friendsInfo.getElements();
+        String[] firstUuid = {friends[0].getUuid()};
+//        String FirstUuid = friends[0].getUuid();
         
+        log.info("첫번째 친구의 uuid에 대한 정보입니다.{}", firstUuid);
         
+        kakaoMessage.doKakaoMessage(firstUuid, kakaoTokenResponse.getAccess_token());
         
 		return "redirect:/usr/eventArticle/listEventArticle";
 	}
