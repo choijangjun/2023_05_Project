@@ -3,12 +3,10 @@
 
 <mapper namespace="com.koreaIT.demo.repository.SaveEventArticleRepository">
 	
-	<select id="getSaveEventArticle" resultType="SaveEventArticle">
+	<select id="getSaveEventArticle" resultType="EventArticle">
 		SELECT *
-			FROM saveEventArticle
-			WHERE memberId = #{loginedMemberId} 
-			AND relId = #{relId}
-			AND relTypeCode = #{relTypeCode}
+			FROM event_Article
+			WHERE id = #{id}
 	</select>
 	
 	<select id="getSaveEventArticles" resultType="EventArticle">

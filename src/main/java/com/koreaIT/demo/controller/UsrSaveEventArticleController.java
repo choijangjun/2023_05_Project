@@ -41,10 +41,6 @@ public class UsrSaveEventArticleController {
 		return saveEventArticle;
 	}
 	
-    
-    public void testScheduled() {
-    	System.out.println("테스트 성공!!");
-    }
 	
 	@RequestMapping("/usr/myPage/mySaveEventArticle")
 	public String showSaveList(Model model, @RequestParam(defaultValue = "1") int page, 

@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class KakaoOauthCode {
     private String code;
+    private String error;
 }

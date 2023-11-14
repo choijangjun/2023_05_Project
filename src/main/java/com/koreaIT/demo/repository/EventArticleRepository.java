@@ -36,4 +36,6 @@ public interface EventArticleRepository {
 
 	void doModifyKategorie(List<String> kategorie, int id);
 
+	EventArticle getEventArticleMessage(int id);
+
 }

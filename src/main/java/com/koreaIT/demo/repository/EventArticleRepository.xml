@@ -14,13 +14,18 @@
 			      )
 	</update>
 	
+	<select id="getEventArticleMessage" resultType="EventArticle">
+		SELECT EA.*
+			FROM event_Article EA
+			WHERE EA.id = #{id}
+	</select>
+	
 	<select id="getEventArticle" resultType="EventArticle">
 		SELECT EA.* , GROUP_CONCAT(EK.kategorie SEPARATOR ',') kategorie
 			FROM event_Article EA
 			LEFT JOIN event_Kategorie EK
 			ON EK.relId = EA.id
 			WHERE EA.id = #{id}
-			
 	</select>
 	
 	<insert id="writeEventArticle">

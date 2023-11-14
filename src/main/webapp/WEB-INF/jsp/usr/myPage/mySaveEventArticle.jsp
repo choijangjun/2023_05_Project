@@ -91,7 +91,7 @@
 														</table>
 													</div>
 														<div>
-															<button id="test">알림보내기</button>
+															<a class="h-full px-3 flex items-center" href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=1ce061089c0f3113b3087e913c3f1f8a&redirect_uri=http://127.0.0.1:8082/usr/member/kakaoMessage&state=${saveEventArticle.id}"><span>메시지보내기</span></a>
 														</div>
 												</div>
 											</div>

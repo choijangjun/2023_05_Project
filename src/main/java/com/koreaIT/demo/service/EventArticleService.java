@@ -28,6 +28,11 @@ public class EventArticleService {
 	public int getEventArticlesCnt(List<String> checkKeyword, String searchKeywordType, String searchKeyword) {
 		return eventArticleRepository.getEventArticlesCnt(checkKeyword, searchKeywordType, searchKeyword);
 	}
+	
+	public EventArticle getEventArticleMessage(int id) {
+		EventArticle eventArticle = eventArticleRepository.getEventArticleMessage(id);
+		return eventArticle;
+	}
 
 	public void increaseHitCount(int id) {
 		eventArticleRepository.increaseHitCount(id);
